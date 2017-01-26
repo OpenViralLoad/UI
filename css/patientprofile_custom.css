@@ -36,5 +36,17 @@
 #right-panel {
     height: 680px;
     padding-right: 0px;
-    border: 1px solid #0275d8;
+}
+
+#sched-panel, #notes-panel {
+    height: 270px;
+}
+
+#sched-button {
+    margin-top: 32px;
+}
+
+#graph-panel {
+    height: 410px;
+    width: 100%;
 }
