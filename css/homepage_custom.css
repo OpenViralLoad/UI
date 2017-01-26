@@ -13,3 +13,7 @@
 #home-search-results {
     height: 400px;
 }
+
+#search-results-table th, #search-results-table td {
+    text-align: center;
+}
