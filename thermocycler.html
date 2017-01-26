@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>OVL | Home</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Homepage Custom Styles -->
+    <link href="css/thermocycler_custom.css" rel="stylesheet">
+    <!-- Progress Barr CSS -->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light navbar-toggleable-sm">
+      <div class="container">
+        <!-- <a class="navbar-brand" href="#">OVL</a> -->
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Patients</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Devices</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div id="home-top-logo" class="row justify-content-center">
+        <img src="img/logo0.png" class='img-fluid'>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div id="home-new-button" class="card card-outline-primary card-block">
+            <table class="table table-striped">
+                <tr>
+                    <th><h4>Device Settings</h4></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Denaturation Mode</th>
+                    <th>Off</th>
+                </tr>
+                <tr>
+                    <th>Temperature for Floor</th>
+                    <th>60</th>
+                </tr>
+                <tr>
+                    <th>Temperature for Ceiling</th>
+                    <th>95</th>
+                </tr>
+                <tr>
+                    <th>Time for Maintain</th>
+                    <th>2</th>
+                </tr>
+                 <tr>
+                    <th>Number of Cycles</th>
+                    <th>40</th>
+                </tr>
+                
+            </table>
+          </div>
+          <br>
+          <div id="home-search-haha" class="card card-outline-primary card-block">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <button class="btn btn-default">Start Thermocycler</button>
+                        <br><br>
+                        <button class="btn btn-default">Restart Thermocycler</button>
+                    </div>
+                    <div class="col-sm-7">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Change Thermocycler Settings</button>
+                        <br><br>
+                        <button class="btn btn-default">Stop Thermocycler</button>
+                    </div>
+                </div>
+          </div>
+          </div>
+         <div class="col-sm-6">
+              <div id="home-search-bar" class="card card-outline-primary card-block">
+                               <h3>Thermocycler Status</h3>
+                 <div class>
+
+                 <div class="progress">
+                     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" active="true" style="width: 45%">
+                         <span class="sr-only">45% Complete</span>
+                     </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <p><b>Cycle </b> 14 <b>out of</b> 40</p>
+                          <p><b>Current Stage: </b> Cooling </p>
+                      </div>
+                      <div class="col-sm-6">
+                          <p><b>Current Temperature: </b> 58 C </p>
+                          <p><b>Time Elapsed: </b> 55 mins </p>
+                      </div>
+                          
+                  </div>
+
+                     
+                 </div>
+              </div>
+              <br>
+              <div id="home-search-results" class="card card-outline-primary card-block">
+                  <b>Device Cycle Pattern</b>
+                  <canvas id="cycleGraph" width="380" height="198"></canvas>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Thermocycler Settings</h4>
+      </div>
+      <div class="modal-body">
+          <table table-striped>
+              <tr><th>HIV</th></tr>
+              <tr><th>TB</th></tr>
+              <tr><th>Deadly Disease 3</th></tr>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/Chart.js"></script>
+    <script src="js/jquery-3.1.1.slim.min.js"></script>
+    <script src="js/jQuery-plugin-progressbar.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script>
+    var ctx = document.getElementById("cycleGraph");
+    var data = {
+    labels: ["Begin Denaturization", "Maintain", "Begin Ramp Up 1", "Maintain", "Cooling", "Maintaining", "Ramp Up Cycle 2","Maintain"],
+    datasets: [
+        {
+            
+            data: [20, 60, 60, 95, 95, 60, 60, 95, 95],
+            spanGaps: false,
+            steppedLine: false,
+            lineTension: 0,
+            fill: false,
+            label: 'Temperature (in C)'
+        }
+    ]
+    };
+    var graph = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+            xAxes: [{
+                display: false
+            }]
+        }
+
+    }
+    });
+    </script>
+  </body>
+</html>
