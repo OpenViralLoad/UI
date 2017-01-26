@@ -1,0 +1,40 @@
+.navbar {
+    margin-bottom: 20px;
+}
+
+.container {
+    padding: 0px;
+}
+
+#start-test-button {
+    padding: 8px 30px;
+    margin-left: 3px;
+}
+
+#btn-panel-left {
+    padding-left: 0px;
+}
+
+#btn-panel-right {
+    padding-right: 0px;
+}
+
+#left-panel, #left-panel>div {
+    height: 680px;
+    padding-left: 0px;
+}
+
+#patient-name {
+    margin-bottom: 20px;
+}
+
+.list-group-item, .left-panel-list {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#right-panel {
+    height: 680px;
+    padding-right: 0px;
+    border: 1px solid #0275d8;
+}
