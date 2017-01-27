@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>OVL | Patient Form</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Patient Form Custom Styles -->
-    <link href="css/patientform_custom.css" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  <title>OVL | Patient Form</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Patient Form Custom Styles -->
+  <link href="css/patientform_custom.css" rel="stylesheet">
+</head>
 
-  <body>
-    <nav class="navbar navbar-light navbar-toggleable-sm">
-      <div class="container">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="btn btn-primary" href="index.html" role="button">Back</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
+<body>
+  <nav class="navbar navbar-light navbar-toggleable-sm">
     <div class="container">
-      <div class="card card-outline-primary card-block">
-        <div class="mb-3">
-          <h2 id="form-title">Patient Information</h2>
-        </div>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="btn btn-primary" href="index.html" role="button">Back</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card card-outline-primary card-block">
+      <div class="mb-3">
+        <h2 id="form-title">Patient Information</h2>
+      </div>
+      <form action="/add_patient" method="post">
         <div class="form-group">
           <label for="first-name-input">First Name<font color='red'>*</font></label>
-          <input class="form-control" type="text" id="first-name-input" required>
+          <input class="form-control" type="text" id="first-name-input" name="first_name" required>
         </div>
         <div class="form-group">
           <label for="last-name-input">Last Name<font color='red'>*</font></label>
-          <input class="form-control" type="text" id="last-name-input" required>
+          <input class="form-control" type="text" id="last-name-input" name="last_name" required>
         </div>
         <div class="form-group">
           <label for="gender-input1 gender-input2">Sex<font color='red'>*</font></label><br />
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                id="gender-input1" value="male" required> Male
-            </label>
+                  <input class="form-check-input" type="radio" name="sex"
+                  id="gender-input1" value="male" required> Male
+              </label>
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                id="gender-input2" value="female" required> Female
-            </label>
+                  <input class="form-check-input" type="radio" name="sex"
+                  id="gender-input2" value="female" required> Female
+              </label>
           </div>
         </div>
         <div class="form-group">
           <label for="dob-input">Date of Birth<font color='red'>*</font></label>
-          <input class="form-control" type="date" id="dob-input" required>
+          <input class="form-control" type="date" id="dob-input" name="date_of_birth" required>
         </div>
         <div class="form-group">
           <label for="phone-number-input">Phone Number</label>
           <!-- pattern="^\d{3}-\d{3}-\d{4}$" -->
-          <input class="form-control" type="tel" maxlength="12" id="phone-number-input">
+          <input class="form-control" type="tel" maxlength="12" id="phone-number-input" name="phone_number">
         </div>
         <div class="form-group">
           <label for="file-input">Photo</label>
@@ -69,17 +70,19 @@
         <div class="form-group">
           <label for="comments-input">Comments</label>
           <small id="comments-help" class="form-text text-muted">Any important info to note such as medications and medical conditions.</small>
-          <textarea class="form-control" id="comments-input" rows="3"></textarea>
+          <textarea class="form-control" id="comments-input" rows="3" name="extra_comments"></textarea>
         </div>
         <button type="submit" class="btn btn-primary mx-auto" role="button">Submit</button>
-      </div>
+      </form>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="js/jquery-3.1.1.slim.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery-3.1.1.slim.min.js"></script>
+  <script src="js/tether.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
 </html>
