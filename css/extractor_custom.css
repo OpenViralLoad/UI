@@ -1,0 +1,39 @@
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.custom-card {
+    border: solid 1px #0275d8;
+    padding: 20px;
+}
+
+.div-header {
+    margin-bottom: 10px;
+}
+
+.inline-div {
+    display: inline-block;
+}
+
+.no-lr-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#lysis-step, #elution-step {
+    width: 14%;
+}
+
+#wash-step1-1, #wash-step1-2, #wash-step2-1, #wash-step2-2 {
+    width: 18%;
+}
+
+.control-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.half-height {
+    height: 50%;
+}
