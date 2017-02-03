@@ -1,1 +1,0 @@
-from .WorldcareUI import app

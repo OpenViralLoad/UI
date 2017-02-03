@@ -1,3 +1,0 @@
-graft WorldcareUI/templates
-graft WorldcareUI/static
-include WorldcareUI/schema.sql

@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'patients.db'),
+    DATABASE=os.path.join(app.root_path, 'medical_records.db'),
     SECRET_KEY='development key',
     USERNAME='admin',
     PASSWORD='default'
