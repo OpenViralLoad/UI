@@ -22,7 +22,7 @@
     <nav class="navbar navbar-toggleable-sm">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active" href="index.html">Patients</a>
+          <a class="nav-link active" href="/">Patients</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Devices</a>
@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div id="home-new-button" class="card card-outline-primary card-block">
-          <a class="btn btn-primary mx-4" href="patient_form.html" role="button">Add New Patient</a>
+          <a class="btn btn-primary mx-4" href="/patient_form" role="button">Add New Patient</a>
         </div>
         <div id="home-carousel" class="carousel slide" data-interval="false">
           <div class="carousel-inner" role="listbox">
@@ -61,14 +61,16 @@
       </div>
       <div class="col-lg-6">
         <div id="home-search-bar" class="card card-outline-primary card-block">
-          <form class="form-inline my-2 my-md-0 justify-content-center">
-            <input class="form-control col-7" type="text" placeholder="Search for Patient">
-            <select id="search-filter" class="form-control my-2 my-sm-0">
+          <form class="form-inline my-2 my-md-0 justify-content-center" action="{{ url_for('index') }}" method="POST">
+            <input class="form-control col-7" type="text" placeholder="Search for Patient" name="search_text">
+            <select id="search-filter" class="form-control my-2 my-sm-0" name="search_filter">
                 <option>ID</option>
                 <option>Lastname</option>
                 <option>Phone #</option>
-              </select>
-            <button class="btn btn-outline-success my-2 my-sm-0" role="button" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </select>
+            <button class="btn btn-outline-success my-2 my-sm-0" role="button" type="submit" value="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
           </form>
         </div>
         <div id="home-search-results" class="card card-outline-primary">
