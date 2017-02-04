@@ -1,16 +1,8 @@
-.navbar {
-    margin-bottom: 20px;
-}
-
-.container {
-    padding: 0px;
-}
-
 #home-new-button, #home-carousel, #home-search-bar, #home-search-results {
     margin: 20px 0 0 0;
 }
 
-#home-search-results {
+#home-carousel, #home-search-results {
     height: 400px;
 }
 

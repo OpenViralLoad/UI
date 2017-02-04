@@ -1,7 +1,25 @@
-.navbar {
+html {
+    height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+}
+
+nav.navbar {
     margin-bottom: 20px;
 }
 
-#top-status-tabs {
+.container {
+    padding: 0px;
+    height: 100vh;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.top-status-tabs {
     margin-bottom: 10px;
 }

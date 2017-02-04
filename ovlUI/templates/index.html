@@ -6,30 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>OVL | Home</title>
     <!-- Bootstrap Core CSS -->
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- Homepage Custom Styles -->
-    <link href="{{ url_for('static', filename='css/homepage_custom.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link href="{{ url_for('static', filename='css/header.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/homepage.css') }}" rel="stylesheet">
   </head>
 
   <body>
-    <nav class="navbar navbar-light navbar-toggleable-sm">
-      <div class="container">
-        <!-- <a class="navbar-brand" href="#">OVL</a> -->
+    <div class="container">
+      <nav class="navbar navbar-toggleable-sm">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Patients</a>
+            <a class="nav-link active" href="index.html">Patients</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Devices</a>
           </li>
         </ul>
-      </div>
-    </nav>
-
-    <div class="container">
+      </nav>
       <div id="home-top-logo" class="row justify-content-center">
         <img src="{{ url_for('static', filename='img/logo0.png') }}" class='img-fluid'>
       </div>
