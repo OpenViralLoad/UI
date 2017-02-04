@@ -9,3 +9,7 @@
 #search-results-table th, #search-results-table td {
     text-align: center;
 }
+
+#search-filter {
+    height: 38px;
+}
