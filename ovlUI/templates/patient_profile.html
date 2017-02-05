@@ -1,110 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <title>OVL | {% patient_name %}</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Patient Form Custom Styles -->
-    <link href="css/patientprofile_custom.css" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <title>OVL | Home</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Font-Awesome-Icons -->
+  <link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="{{ url_for('static', filename='css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/patientprofile.css') }}" rel="stylesheet">
+</head>
 
-  <body>
+<body>
+  <div class="container">
     <nav class="navbar navbar-light navbar-toggleable-sm">
-      <div class="container">
-        <div id="btn-panel-left" class="col-sm-6 text-left">
-          <a class="btn btn-primary" href="index.html" role="button">Back</a>
-        </div>
-        <div id="btn-panel-right" class="col-sm-6 text-right">
-          <button class="btn btn-danger" role="button">Delete Profile</button>
-          <button id="start-test-button" class="btn btn-success" role="button">Start Test</button>
-        </div>
+      <div id="btn-panel-left" class="col-sm-6 text-left">
+        <a class="btn btn-primary" href="/" role="button">Back</a>
+      </div>
+      <div id="btn-panel-right" class="col-sm-6 text-right">
+        <button class="btn btn-danger" role="button">Delete Profile</button>
+        <button id="start-test-button" class="btn btn-success" role="button">Start Test</button>
       </div>
     </nav>
-
-    <div class="container">
-      <div class="row">
-        <div id="left-panel" class="col-sm-3">
-          <div class="card card-outline-primary">
-            <div id="profile-pic-canvas">
-              <img id="profile-pic" class="card-img-top img-fluid" src="img/profile0.jpg">
-            </div>
+    <div class="row">
+      <div id="left-panel" class="col-sm-3">
+        <div class="card card-outline-primary">
+          <div id="profile-pic-canvas">
+            <img id="profile-pic" class="card-img-top img-fluid" src="{{ url_for('static', filename='img/profpic_' + patient.patient_id|string + '.jpg') }}">
+          </div>
+          <div class="card-block">
+            <h4 id="patient-name" class="card-title text-center">{{ patient.first_name }} {{ patient.last_name }}</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">Sex</div>
+                <div class="col-sm-6 text-right left-panel-list">{{ patient.sex }}</div>
+              </li>
+              <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">DoB</div>
+                <div class="col-sm-6 text-right left-panel-list">{{ patient.date_of_birth }}</div>
+              </li>
+              <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">Height</div>
+                <div class="col-sm-6 text-right left-panel-list">N/A</div>
+              </li>
+              <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">Weight</div>
+                <div class="col-sm-6 text-right left-panel-list">N/A</div>
+              </li>
+              <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">Phone</div>
+                <div class="col-sm-6 text-right left-panel-list">{{ patient.phone_number }}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="right-panel" class="col-sm-9">
+        <div class="row">
+          <div id="sched-panel" class="col-sm-4 card card-outline-primary px-0">
+            <h4 class="card-header">Scheduling</h4>
             <div class="card-block">
-              <h4 id="patient-name" class="card-title text-center">Doge</h4>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  <div class="col-sm-6 text-left left-panel-list">Sex</div>
-                  <div class="col-sm-6 text-right left-panel-list">Male</div>
+                  <div class="col-sm-6 text-left left-panel-list">Last Visit</div>
+                  <div class="col-sm-6 text-right left-panel-list">{{ last_visit }}</div>
                 </li>
                 <li class="list-group-item">
-                  <div class="col-sm-6 text-left left-panel-list">DoB</div>
-                  <div class="col-sm-6 text-right left-panel-list">02-23-2010</div>
-                </li>
-                <li class="list-group-item">
-                  <div class="col-sm-6 text-left left-panel-list">Height</div>
-                  <div class="col-sm-6 text-right left-panel-list">0.40 m</div>
-                </li>
-                <li class="list-group-item">
-                  <div class="col-sm-6 text-left left-panel-list">Weight</div>
-                  <div class="col-sm-6 text-right left-panel-list">10 kg</div>
-                </li>
-                <li class="list-group-item">
-                  <div class="col-sm-6 text-left left-panel-list">Phone</div>
-                  <div class="col-sm-6 text-right left-panel-list">123-456-7890</div>
+                  <div class="col-sm-6 text-left left-panel-list">Appointment</div>
+                  <div class="col-sm-6 text-right left-panel-list">{{ appointment }}</div>
                 </li>
               </ul>
+              <button id="sched-button" class="btn btn-outline-primary" role="button">Schedule Visit</button>
+            </div>
+          </div>
+          <div id="notes-panel" class="col-sm-8 card card-outline-primary px-0">
+            <h4 class="card-header">Notes</h4>
+            <div class="card-block">
+              <p class="card-text">{{ patient.notes }}</p>
             </div>
           </div>
         </div>
-        <div id="right-panel" class="col-sm-9">
-          <div class="row">
-            <div id="sched-panel" class="col-sm-4 card card-outline-primary px-0">
-              <h4 class="card-header">Scheduling</h4>
-              <div class="card-block">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <div class="col-sm-6 text-left left-panel-list">Last Visit</div>
-                    <div class="col-sm-6 text-right left-panel-list">10-10-2016</div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="col-sm-6 text-left left-panel-list">Appointment</div>
-                    <div class="col-sm-6 text-right left-panel-list">10-10-2017</div>
-                  </li>
-                </ul>
-                <button id="sched-button" class="btn btn-outline-primary" role="button">Schedule Visit</button>
-              </div>
-            </div>
-            <div id="notes-panel" class="col-sm-8 card card-outline-primary px-0">
-              <h4 class="card-header">Notes</h4>
-              <div class="card-block">
-                <p class="card-text">very hiv. much rna. wow.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div id="graph-panel" class="card card-outline-primary">
-              <h4 class="card-header">Viral Load Data</h4>
-              <!-- Note: might use nvd3.js for scatter plot instead -->
-              <canvas id="viral-load-plot"></canvas>
-            </div>
+        <div class="row">
+          <div id="graph-panel" class="card card-outline-primary">
+            <h4 class="card-header">Viral Load Data</h4>
+            <!-- Note: might use nvd3.js for scatter plot instead -->
+            <canvas id="viral-load-plot"></canvas>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="js/jquery-3.1.1.slim.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script src="js/Chart.min.js"></script>
-    <script src="js/scripts/profile_graph.js"></script>
-  </body>
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="{{ url_for('static', filename='js/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/profile_graph.js') }}"></script>
+</body>
 
 </html>

@@ -20,6 +20,24 @@ nav.navbar {
     margin-right: 0px;
 }
 
+.custom-card {
+    border: solid 1px #0275d8;
+    padding: 20px;
+}
+
+.div-header {
+    margin-bottom: 10px;
+}
+
+.inline-div {
+    display: inline-block;
+}
+
+.no-lr-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .top-status-tabs {
     margin-bottom: 10px;
 }

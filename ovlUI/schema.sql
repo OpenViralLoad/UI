@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS patients (
   last_name TEXT NOT NULL CHECK(
         length(last_name) <= 35
     ),
-  sex TEXT CHECK(
+  sex TEXT NOT NULL CHECK(
       sex = "M" OR sex = "F"
   ),
-  date_of_birth TEXT CHECK(
+  date_of_birth TEXT NOT NULL CHECK(
       date_of_birth = strftime('%Y-%m-%d', date_of_birth)
   ),
   phone_number INTEGER UNIQUE,

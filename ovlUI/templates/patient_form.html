@@ -6,31 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   <title>OVL | Patient Form</title>
   <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Patient Form Custom Styles -->
-  <link href="css/patientform_custom.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Font-Awesome-Icons -->
+  <link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="{{ url_for('static', filename='css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/patientform.css') }}" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-light navbar-toggleable-sm">
-    <div class="container">
+  <div class="container">
+    <nav class="navbar navbar-light navbar-toggleable-sm">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="btn btn-primary" href="index.html" role="button">Back</a>
+          <a class="btn btn-primary" href="/" role="button">Back</a>
         </li>
       </ul>
-    </div>
-  </nav>
-
-  <div class="container">
+    </nav>
     <div class="card card-outline-primary card-block">
-      <div class="mb-3">
+      <div class="div-header">
         <h2 id="form-title">Patient Information</h2>
       </div>
-      <form action="/add_patient" method="post">
+      <form action="/add_patient" method="POST">
         <div class="form-group">
           <label for="first-name-input">First Name<font color='red'>*</font></label>
           <input class="form-control" type="text" id="first-name-input" name="first_name" required>
@@ -72,7 +72,7 @@
           <small id="comments-help" class="form-text text-muted">Any important info to note such as medications and medical conditions.</small>
           <textarea class="form-control" id="comments-input" rows="3" name="extra_comments"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mx-auto" role="button">Submit</button>
+        <button type="submit" class="btn btn-primary mx-auto" role="button" value="submit">Submit</button>
       </form>
     </div>
   </div>
