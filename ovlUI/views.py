@@ -61,9 +61,10 @@ def delete_profile(patient_id):
     return redirect(urlfor("index"))
 
 
-@app.route("/profile/<patient_id>/start_test")
-def start_test(patient_id):
-    return redirect(url_for("devices", patient_id=patient_id))
+@app.route("/profile/<patient_id>/add_sample/<device_type>")
+def add_sample(patient_id, device_type):
+    return redirect(url_for("devices",
+                            patient_id=patient_id, device_type=device_type))
 
 
 @app.route("/devices")
