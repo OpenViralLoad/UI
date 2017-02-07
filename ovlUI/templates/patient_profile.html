@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-  <title>OVL | Home</title>
+  <title>OVL | Profile</title>
   <!-- Bootstrap Core CSS -->
   <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
   <!-- Font-Awesome-Icons -->
@@ -19,7 +19,7 @@
 
 <body>
   <div class="container">
-    <nav class="navbar navbar-light navbar-toggleable-sm">
+    <nav class="navbar navbar-light navbar-toggleable-sm no-lr-padding">
       <div id="btn-panel-left" class="col-sm-6 text-left">
         <a class="btn btn-primary" href="/" role="button">Back</a>
       </div>
@@ -28,11 +28,11 @@
         <button id="start-test-button" class="btn btn-success" role="button">Start Test</button>
       </div>
     </nav>
-    <div class="row">
+    <div id="primary-row" class="row">
       <div id="left-panel" class="col-sm-3">
         <div class="card card-outline-primary">
           <div id="profile-pic-canvas">
-            <img id="profile-pic" class="card-img-top img-fluid" src="{{ url_for('static', filename='img/profpic_' + patient.patient_id|string + '.jpg') }}">
+            <img id="profile-pic" class="card-img-top img-fluid" src="{{ url_for('static', filename='img/profile_pics/' + patient.patient_id|string + '.jpg') }}">
           </div>
           <div class="card-block">
             <h4 id="patient-name" class="card-title text-center">{{ patient.first_name }} {{ patient.last_name }}</h4>
@@ -45,6 +45,8 @@
                 <div class="col-sm-6 text-left left-panel-list">DoB</div>
                 <div class="col-sm-6 text-right left-panel-list">{{ patient.date_of_birth }}</div>
               </li>
+              <!-- Not sure if patient stats like height and weight will be included
+                can add more columns in 'patients' table as needed-->
               <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Height</div>
                 <div class="col-sm-6 text-right left-panel-list">N/A</div>
@@ -62,7 +64,7 @@
         </div>
       </div>
       <div id="right-panel" class="col-sm-9">
-        <div class="row">
+        <div id="secondary-row-top" class="row">
           <div id="sched-panel" class="col-sm-4 card card-outline-primary px-0">
             <h4 class="card-header">Scheduling</h4>
             <div class="card-block">
@@ -86,9 +88,8 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div id="secondary-row-bot" class="row">
           <div id="graph-panel" class="card card-outline-primary">
-            <h4 class="card-header">Viral Load Data</h4>
             <!-- Note: might use nvd3.js for scatter plot instead -->
             <canvas id="viral-load-plot"></canvas>
           </div>
@@ -98,7 +99,6 @@
   </div>
 
   <!-- Bootstrap core JavaScript -->
-
   <script src="{{ url_for('static', filename='js/jquery-3.1.1.slim.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>

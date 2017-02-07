@@ -1,11 +1,3 @@
-.navbar {
-    margin-bottom: 20px;
-}
-
-.container {
-    padding: 0px;
-}
-
 #start-test-button {
     padding: 8px 30px;
     margin-left: 3px;
@@ -19,9 +11,30 @@
     padding-right: 0px;
 }
 
-#left-panel, #left-panel>div {
-    height: 680px;
+#primary-row {
+    height: 720px;
+}
+
+#secondary-row-top {
+    height: 40%;
+}
+
+#secondary-row-bot {
+    height: 60%;
+}
+
+#left-panel, #left-panel>div, #right-panel {
+    height: 720px;
     padding-left: 0px;
+    padding-right: 0px;
+}
+
+#profile-pic-canvas {
+    height: 40%;
+}
+
+#profile-pic {
+    height: 100%;
 }
 
 #patient-name {
@@ -33,20 +46,27 @@
     padding-right: 0px;
 }
 
-#right-panel {
-    height: 680px;
-    padding-right: 0px;
+#sched-panel, #notes-panel {
+    height: 100%;
 }
 
-#sched-panel, #notes-panel {
-    height: 270px;
+#notes-panel> div.card-block {
+    overflow-y: auto;
+}
+
+#sched-panel> div> ul> li:nth-child(1) {
+    padding-top: 0px;
 }
 
 #sched-button {
-    margin-top: 32px;
+    margin-top: 20px;
 }
 
 #graph-panel {
-    height: 410px;
+    height: 100%;
     width: 100%;
+}
+
+#viral-load-plot {
+    height: 100%;
 }

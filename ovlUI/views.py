@@ -1,4 +1,4 @@
-from flask import render_template, request, flash, redirect
+from flask import render_template, request, flash, redirect, url_for
 from ovlUI import app, database_ops
 
 
@@ -27,7 +27,7 @@ def index():
 
 
 @app.route("/patient_form")
-def new_patient():
+def patient_form():
     return render_template("patient_form.html")
 
 
