@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <title>OVL | Devices</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Font-Awesome-Icons -->
+  <link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="{{ url_for('static', filename='css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/devices.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-light navbar-toggleable-sm">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Patients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/devices">Devices</a>
+        </li>
+      </ul>
+    </nav>
+    <ul class="nav nav-pills nav-justified top-status-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#extrac_1" role="tab">
+          Extractor-1
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 25%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#thermo_1" role="tab">
+          Thermocycler-1
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 44%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#imager_1" role="tab">
+          Imager-1
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 66%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#extrac_2" role="tab">
+          Extractor-2
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 14%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#thermo_2" role="tab">
+          Thermocycler-2
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#imager_2" role="tab">
+          Imager-2
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 39%; height: 2px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="extrac_1" role="tabpanel"></div>
+      <div class="tab-pane" id="thermo_1" role="tabpanel"></div>
+      <div class="tab-pane" id="imager_1" role="tabpanel"></div>
+      <div class="tab-pane" id="extrac_2" role="tabpanel"></div>
+      <div class="tab-pane" id="thermo_2" role="tabpanel"></div>
+      <div class="tab-pane" id="imager_2" role="tabpanel"></div>
+    </div>
+    <p><button onclick="clickCounter()" type="button">Click me!</button></p>
+    <div id="result"></div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
+  <!-- ChartJS Javascript -->
+  <script src="{{ url_for('static', filename='js/lib/Chart.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
+  <!-- localStorage Code -->
+  <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
+</body>
+
+</html>

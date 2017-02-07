@@ -41,3 +41,12 @@ nav.navbar {
 .top-status-tabs {
     margin-bottom: 10px;
 }
+
+.control-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.half-height {
+    height: 50%;
+}

@@ -1,0 +1,12 @@
+#cycleGraph {
+    height: 350px;
+    width: 370px;
+}
+
+#lysis-step, #elution-step {
+    width: 14%;
+}
+
+#wash-step1-1, #wash-step1-2, #wash-step2-1, #wash-step2-2 {
+    width: 18%;
+}

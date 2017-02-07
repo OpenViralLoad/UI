@@ -50,3 +50,22 @@ def profile(patient_id):
     last_visit = appointments[1][0]
     return render_template("patient_profile.html", patient=patient,
                            appointment=appointment, last_visit=last_visit)
+
+
+@app.route("/profile/<patient_id>/delete")
+def delete_profile(patient_id):
+    db = database_ops.get_db()
+    cur = db.execute(
+        "delete from patients where patient_id={0}".format(patient_id)
+    )
+    return redirect(urlfor("index"))
+
+
+@app.route("/profile/<patient_id>/start_test")
+def start_test(patient_id):
+    return redirect(url_for("devices", patient_id=patient_id))
+
+
+@app.route("/devices")
+def devices():
+    return render_template("devices.html")
