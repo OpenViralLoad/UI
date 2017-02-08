@@ -26,9 +26,32 @@ def index():
     return render_template("index.html", patients=patients)
 
 
-@app.route("/patient_form")
+@app.route("/patient_form", methods=['GET', 'POST'])
 def patient_form():
-    return render_template("patient_form.html")
+	if request.method == 'POST':
+		db = database_ops.get_db()
+		firstName = request.form['first_name']
+		lastName = request.form['last_name']
+		sex = request.form['sex']
+		if sex == 'Female':
+			sex = 'F'
+		else:
+			sex = 'M'
+		dateOfBirth = request.form['date_of_birth']
+		phoneNum = request.form['phone_number']
+		comments = request.form['extra_comments']
+		cur = db.execute('''SELECT COUNT (*) FROM patients''')
+		numPatient = cur.fetchone()[0]
+		patientID = numPatient + 1
+		cur = db.execute(
+			'''INSERT INTO patients(patient_id, first_name, \
+			last_name, sex, date_of_birth, phone_number, notes) VALUES \
+			(?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex, \
+			dateOfBirth, phoneNum, comments))
+		db.commit()
+		return redirect('/profile/{0}'.format(patientID))
+
+	return render_template("patient_form.html")
 
 
 @app.route("/profile/<patient_id>")
@@ -46,8 +69,12 @@ def profile(patient_id):
         where patient_id={0} order by appt_date desc".format(patient_id)
     )
     appointments = cur.fetchall()
-    appointment = appointments[0][0]
-    last_visit = appointments[1][0]
+    try:
+    	appointment = appointments[0][0]
+    	last_visit = appointments[1][0]
+    except:
+    	appointment = 'N/A'
+    	last_visit = 'N/A'
     return render_template("patient_profile.html", patient=patient,
                            appointment=appointment, last_visit=last_visit)
 
