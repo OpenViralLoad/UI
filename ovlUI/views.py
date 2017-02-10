@@ -1,5 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from ovlUI import app, database_ops
+from werkzeug import secure_filename
+import os
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -25,6 +27,9 @@ def index():
         patients = cur.fetchall()
     return render_template("index.html", patients=patients)
 
+def allowed_file(filename):
+	return '.' in filename and \
+			filename.rsplit('.',1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 @app.route("/patient_form", methods=['GET', 'POST'])
 def patient_form():
@@ -43,6 +48,11 @@ def patient_form():
 		cur = db.execute('''SELECT COUNT (*) FROM patients''')
 		numPatient = cur.fetchone()[0]
 		patientID = numPatient + 1
+		file = request.files['photo']
+		if file and allowed_file(file.filename):
+			file.filename = str(patientID)
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		cur = db.execute(
 			'''INSERT INTO patients(patient_id, first_name, \
 			last_name, sex, date_of_birth, phone_number, notes) VALUES \
@@ -88,12 +98,12 @@ def delete_profile(patient_id):
     return redirect(urlfor("index"))
 
 
-@app.route("/profile/<patient_id>/add_sample/<device_type>")
-def add_sample(patient_id, device_type):
-    return redirect(url_for("devices",
-                            patient_id=patient_id, device_type=device_type))
+@app.route("/profile/<patient_id>/start_test")
+def start_test(patient_id):
+    return redirect(url_for("devices", patient_id=patient_id))
 
 
 @app.route("/devices")
 def devices():
     return render_template("devices.html")
+
