@@ -49,7 +49,6 @@ def patient_form():
 		numPatient = cur.fetchone()[0]
 		patientID = numPatient + 1
 		file = request.files['photo']
-		print(file)
 		if file and allowed_file(file.filename):
 			file.filename = str(patientID)
 			filename = secure_filename(file.filename)
