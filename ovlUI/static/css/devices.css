@@ -1,6 +1,5 @@
-#cycleGraph {
-    height: 350px;
-    width: 370px;
+.tab_progress {
+    height: 2px;
 }
 
 #lysis-step, #elution-step {
@@ -9,4 +8,46 @@
 
 #wash-step1-1, #wash-step1-2, #wash-step2-1, #wash-step2-2 {
     width: 18%;
+}
+
+#ext-status> h4, #ext-ctrl> h4 {
+    margin-bottom: 20px;
+}
+
+#ext-status> p:nth-child(2) {
+    margin-bottom: 10px;
+}
+
+#primary-therm-row {
+    height: 580px;
+}
+
+#therm-settings {
+    height: 70%;
+    margin-bottom: 20px;
+}
+
+#btn-row1, #btn-row2 {
+    margin-top: 18px;
+}
+
+#therm-controls {
+    height: 30%;
+}
+
+#therm-status {
+    height: 30%;
+    margin-bottom: 20px;
+}
+
+#therm-rtstat {
+    margin-top: 10px;
+}
+
+#therm-pattern {
+    height: 70%;
+}
+
+.cycleGraph {
+    margin-top: 10px;
 }
