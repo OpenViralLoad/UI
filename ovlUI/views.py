@@ -50,7 +50,7 @@ def patient_form():
 		patientID = numPatient + 1
 		file = request.files['photo']
 		if file and allowed_file(file.filename):
-			file.filename = str(patientID)
+			file.filename = str(patientID) + '.jpg'
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		cur = db.execute(
