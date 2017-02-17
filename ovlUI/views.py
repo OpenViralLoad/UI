@@ -33,35 +33,33 @@ def allowed_file(filename):
 
 @app.route("/patient_form", methods=['GET', 'POST'])
 def patient_form():
-	if request.method == 'POST':
-		db = database_ops.get_db()
-		firstName = request.form['first_name']
-		lastName = request.form['last_name']
-		sex = request.form['sex']
-		if sex == 'Female':
-			sex = 'F'
-		else:
-			sex = 'M'
-		dateOfBirth = request.form['date_of_birth']
-		phoneNum = request.form['phone_number']
-		comments = request.form['extra_comments']
-		cur = db.execute('''SELECT COUNT (*) FROM patients''')
-		numPatient = cur.fetchone()[0]
-		patientID = numPatient + 1
-		file = request.files['photo']
-		if file and allowed_file(file.filename):
-			file.filename = str(patientID) + '.jpg'
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		cur = db.execute(
-			'''INSERT INTO patients(patient_id, first_name, \
-			last_name, sex, date_of_birth, phone_number, notes) VALUES \
-			(?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex, \
-			dateOfBirth, phoneNum, comments))
-		db.commit()
-		return redirect('/profile/{0}'.format(patientID))
-
-	return render_template("patient_form.html")
+    if request.method == 'POST':
+        db = database_ops.get_db()
+        firstName = request.form['first_name']
+        lastName = request.form['last_name']
+        sex = request.form['sex']
+        if sex == 'Female':
+            sex = 'F'
+        else:
+            sex = 'M'
+        dateOfBirth = request.form['date_of_birth']
+        phoneNum = request.form['phone_number']
+        comments = request.form['extra_comments']
+        cur = db.execute('''SELECT COUNT (*) FROM patients''')
+        numPatient = cur.fetchone()[0]
+        patientID = numPatient + 1
+        file = request.files['photo']
+        if file and allowed_file(file.filename):
+            file.filename = str(patientID) + '.jpg'
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            cur = db.execute('''INSERT INTO patients(patient_id, first_name, \
+                last_name, sex, date_of_birth, phone_number, notes) VALUES \
+                (?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex, \
+                dateOfBirth, phoneNum, comments))
+        db.commit()
+        return redirect('/profile/{0}'.format(patientID))
+    return render_template("patient_form.html")
 
 
 @app.route("/profile/<patient_id>")
@@ -89,13 +87,14 @@ def profile(patient_id):
                            appointment=appointment, last_visit=last_visit)
 
 
-@app.route("/profile/<patient_id>/delete")
+@app.route("/profile/<patient_id>/delete", methods=['POST'])
 def delete_profile(patient_id):
     db = database_ops.get_db()
     cur = db.execute(
         "delete from patients where patient_id={0}".format(patient_id)
     )
-    return redirect(urlfor("index"))
+    db.commit()
+    return redirect(url_for("index"))
 
 
 @app.route("/profile/<patient_id>/start_test")
