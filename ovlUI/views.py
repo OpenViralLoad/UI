@@ -19,12 +19,14 @@ def index():
         # NOTE: need to handle special chars and text-matching
         # leading 0's, uppercase vs lowercase
         db = database_ops.get_db()
-        cur = db.execute(
-            "select patient_id, first_name, last_name from patients \
-            where {0} = {1} \
-            order by patient_id asc".format(search_filter, search_text)
-        )
-        patients = cur.fetchall()
+        try:
+            cur = db.execute(
+                "select patient_id, first_name, last_name from patients \
+                where {0} = {1} \
+                order by patient_id asc".format(search_filter, search_text))
+            patients = cur.fetchall()
+        except:
+            patients = None
     return render_template("index.html", patients=patients)
 
 def allowed_file(filename):
