@@ -14,16 +14,30 @@ def index():
         elif search_filter == "Lastname":
             search_filter = "last_name"
         else:
-            search_filter == "phone_number"
+            search_filter = "phone_number"
         search_text = request.form['search_text']
         # NOTE: need to handle special chars and text-matching
         # leading 0's, uppercase vs lowercase
         db = database_ops.get_db()
         try:
+            '''
             cur = db.execute(
                 "select patient_id, first_name, last_name from patients \
-                where {0} = {1} \
+                where {0} = '{1}' \
                 order by patient_id asc".format(search_filter, search_text))
+            '''
+            if search_filter == "last_name":
+                cur = db.execute(
+                    "select patient_id, first_name, last_name from patients \
+                    where last_name=:text",{"text":search_text})
+            elif search_filter == "patient_id":
+                cur = db.execute(
+                    "select patient_id, first_name, last_name from patients \
+                    where patient_id=:text",{"text":search_text})
+            else:
+                cur = db.execute(
+                    "select patient_id, first_name, last_name from patients \
+                    where phone_number=:text",{"text":search_text})
             patients = cur.fetchall()
         except:
             patients = None
