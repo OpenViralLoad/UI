@@ -10,11 +10,11 @@
     width: 18%;
 }
 
-#ext-status> h4, #ext-ctrl> h4 {
+#ext-status>h4, #ext-ctrl>h4 {
     margin-bottom: 20px;
 }
 
-#ext-status> p:nth-child(2) {
+#ext-status>p:nth-child(2) {
     margin-bottom: 10px;
 }
 
@@ -22,9 +22,12 @@
     height: 580px;
 }
 
+#therm-leftside {
+    padding-left: 0px;
+}
+
 #therm-settings {
     height: 70%;
-    margin-bottom: 20px;
 }
 
 #btn-row1, #btn-row2 {
@@ -35,9 +38,13 @@
     height: 30%;
 }
 
+#therm-rightside {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 #therm-status {
     height: 30%;
-    margin-bottom: 20px;
 }
 
 #therm-rtstat {
@@ -50,4 +57,13 @@
 
 .cycleGraph {
     margin-top: 10px;
+}
+
+.badge-big {
+    font-size: 120%;
+    font-weight: 600;
+}
+
+.therm-samples {
+    padding-top: 15px;
 }
