@@ -18,16 +18,35 @@
 </head>
 
 <body>
+  <!-- Modal -->
+  <div class="modal fade" id="start-test-modal-append" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-append-title">Sample Assigned to a Device</h5>
+          <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This sample has been assigned to <b><span id="modal-assigned-device"></span></b>
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-secondary" href="/devices">Continue</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <nav class="navbar navbar-light navbar-toggleable-sm no-lr-padding">
       <div id="btn-panel-left" class="col-sm-6 text-left">
         <a class="btn btn-primary" href="/" role="button">Back</a>
       </div>
       <div id="btn-panel-right" class="col-sm-6 text-right">
-      <form action="{{ url_for('delete_profile', patient_id=patient.patient_id) }}" method="POST">
-        <button type="submit" class="btn btn-danger" role="button">Delete Profile</button>
-        <button id="start-test-button" class="btn btn-success" role="button">Start Test</button>
-      </form>
+        <form action="{{ url_for('delete_profile', patient_id=patient.patient_id) }}" method="POST">
+          <button type="submit" class="btn btn-danger" role="button">Delete Profile</button>
+        </form>
+        <button id="start-test-button" class="btn btn-success" role="button" onclick="startTestModal()">Start Test</button>
       </div>
     </nav>
     <div id="primary-row" class="row">
@@ -40,6 +59,10 @@
             <h4 id="patient-name" class="card-title text-center">{{ patient.first_name }} {{ patient.last_name }}</h4>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
+                <div class="col-sm-6 text-left left-panel-list">ID</div>
+                <div class="col-sm-6 text-right left-panel-list">{{ patient.patient_id }}</div>
+              </li>
+              <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Sex</div>
                 <div class="col-sm-6 text-right left-panel-list">{{ patient.sex }}</div>
               </li>
@@ -49,14 +72,14 @@
               </li>
               <!-- Not sure if patient stats like height and weight will be included
                 can add more columns in 'patients' table as needed-->
-              <li class="list-group-item">
+              <!-- <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Height</div>
                 <div class="col-sm-6 text-right left-panel-list">N/A</div>
               </li>
               <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Weight</div>
                 <div class="col-sm-6 text-right left-panel-list">N/A</div>
-              </li>
+              </li> -->
               <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Phone</div>
                 <div class="col-sm-6 text-right left-panel-list">{{ patient.phone_number }}</div>
@@ -108,8 +131,32 @@
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.min.js') }}"></script>
+  <script>
+    // var session = JSON.parse(localStorage.devices);
+    var session = [{
+      "device_type": "extractor",
+      "device_num": 0,
+      "samples": [{
+        "patient_id": 0,
+        "patient_lname": "Monkey"
+      }, {
+        "patient_id": 1,
+        "patient_lname": "Roronoa"
+      }],
+      "max_slots": 3,
+      "serial_port_id": 1234,
+      "rate": 12,
+      "destination": "therm_1"
+    }];
+    var new_sample = {
+      "patient_id": "{{ patient.patient_id }}",
+      "patient_lname": "{{ patient.last_name }}"
+    };
+  </script>
   <!-- ChartJS Graph Code -->
   <script src="{{ url_for('static', filename='js/profile_graph.js') }}"></script>
+  <!-- Start Test Modal Code -->
+  <script src="{{ url_for('static', filename='js/profile_modal.js') }}"></script>
 </body>
 
 </html>
