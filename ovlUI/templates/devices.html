@@ -285,6 +285,15 @@
   <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
   <!-- localStorage Code -->
   <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
+  <script>
+    if (localStorage.devices == null) {
+      localStorage.devices = JSON.stringify([]);
+      session = JSON.parse(localStorage.devices);
+    } else {
+      session = JSON.parse(localStorage.devices);
+    }
+    console.log(session);
+  </script>
 </body>
 
 </html>

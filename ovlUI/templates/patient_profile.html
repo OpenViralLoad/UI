@@ -18,15 +18,30 @@
 </head>
 
 <body>
-  <!-- Modal -->
+  <!-- Modal to confirm delete patient request -->
+  <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close ml-auto" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete data for this patient?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <a href="{{ patient.patient_id }}/delete" class="btn btn-danger" role="button">DO IT!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal to append sample to session with active extractor -->
   <div class="modal fade" id="start-test-modal-append" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modal-append-title">Sample Assigned to a Device</h5>
-          <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         </div>
         <div class="modal-body">
           This sample has been assigned to <b><span id="modal-assigned-device"></span></b>
@@ -37,15 +52,41 @@
       </div>
     </div>
   </div>
+  <!-- Modal to create new extractor in session -->
+  <div class="modal fade" id="start-test-modal-init" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-init-title">Create a New Extractor Tab</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="serial_port_form">Serial Port ID</label>
+            <input class="form-control" type="number" id="serial_port_form" name="serial_port">
+          </div>
+          <div class="form-group">
+            <label for="extrac-rate-form">Extraction Rate (mm/s)</label>
+            <input class="form-control" type="number" step=0.1 id="extrac-rate-form" name="extrac_rate">
+          </div>
+          <div class="form-group">
+            <label for="rec-device-form">Receiving Thermocycler #</label>
+            <input class="form-control" type="number" id="rec-device-form" name="rec-device">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="continue-init" type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <nav class="navbar navbar-light navbar-toggleable-sm no-lr-padding">
       <div id="btn-panel-left" class="col-sm-6 text-left">
         <a class="btn btn-primary" href="/" role="button">Back</a>
       </div>
       <div id="btn-panel-right" class="col-sm-6 text-right">
-        <form action="{{ url_for('delete_profile', patient_id=patient.patient_id) }}" method="POST">
-          <button type="submit" class="btn btn-danger" role="button">Delete Profile</button>
-        </form>
+        <button id="delete-button" class="btn btn-danger" role="button" data-toggle="modal" data-target="#delete-modal">Delete Profile</button>
         <button id="start-test-button" class="btn btn-success" role="button" onclick="startTestModal()">Start Test</button>
       </div>
     </nav>
@@ -70,16 +111,6 @@
                 <div class="col-sm-6 text-left left-panel-list">DoB</div>
                 <div class="col-sm-6 text-right left-panel-list">{{ patient.date_of_birth }}</div>
               </li>
-              <!-- Not sure if patient stats like height and weight will be included
-                can add more columns in 'patients' table as needed-->
-              <!-- <li class="list-group-item">
-                <div class="col-sm-6 text-left left-panel-list">Height</div>
-                <div class="col-sm-6 text-right left-panel-list">N/A</div>
-              </li>
-              <li class="list-group-item">
-                <div class="col-sm-6 text-left left-panel-list">Weight</div>
-                <div class="col-sm-6 text-right left-panel-list">N/A</div>
-              </li> -->
               <li class="list-group-item">
                 <div class="col-sm-6 text-left left-panel-list">Phone</div>
                 <div class="col-sm-6 text-right left-panel-list">{{ patient.phone_number }}</div>
@@ -132,22 +163,29 @@
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.min.js') }}"></script>
   <script>
-    // var session = JSON.parse(localStorage.devices);
-    var session = [{
-      "device_type": "extractor",
-      "device_num": 0,
-      "samples": [{
-        "patient_id": 0,
-        "patient_lname": "Monkey"
-      }, {
-        "patient_id": 1,
-        "patient_lname": "Roronoa"
-      }],
-      "max_slots": 3,
-      "serial_port_id": 1234,
-      "rate": 12,
-      "destination": "therm_1"
-    }];
+    // var session = [];
+    // var session = [{
+    //   "device_type": "extractor",
+    //   "device_num": 0,
+    //   "samples": [{
+    //     "patient_id": 0,
+    //     "patient_lname": "Monkey"
+    //   }, {
+    //     "patient_id": 1,
+    //     "patient_lname": "Roronoa"
+    //   }],
+    //   "max_slots": 3,
+    //   "serial_port_id": 1234,
+    //   "rate": 12,
+    //   "destination": "therm_1"
+    // }];
+    if (localStorage.devices == null) {
+      localStorage.devices = JSON.stringify([]);
+      session = JSON.parse(localStorage.devices);
+    } else {
+      session = JSON.parse(localStorage.devices);
+    }
+    console.log(session);
     var new_sample = {
       "patient_id": "{{ patient.patient_id }}",
       "patient_lname": "{{ patient.last_name }}"

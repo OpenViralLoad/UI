@@ -29,23 +29,25 @@ def index():
             if search_filter == "last_name":
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
-                    where last_name=:text",{"text":search_text})
+                    where last_name=:text", {"text": search_text})
             elif search_filter == "patient_id":
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
-                    where patient_id=:text",{"text":search_text})
+                    where patient_id=:text", {"text": search_text})
             else:
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
-                    where phone_number=:text",{"text":search_text})
+                    where phone_number=:text", {"text": search_text})
             patients = cur.fetchall()
         except:
             patients = None
     return render_template("index.html", patients=patients)
 
+
 def allowed_file(filename):
-	return '.' in filename and \
-			filename.rsplit('.',1)[1] in app.config['ALLOWED_EXTENSIONS']
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
 
 @app.route("/patient_form", methods=['GET', 'POST'])
 def patient_form():
@@ -71,8 +73,8 @@ def patient_form():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             cur = db.execute('''INSERT INTO patients(patient_id, first_name, \
                 last_name, sex, date_of_birth, phone_number, notes) VALUES \
-                (?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex, \
-                dateOfBirth, phoneNum, comments))
+                (?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex,
+                                           dateOfBirth, phoneNum, comments))
         db.commit()
         return redirect('/profile/{0}'.format(patientID))
     return render_template("patient_form.html")
@@ -94,16 +96,16 @@ def profile(patient_id):
     )
     appointments = cur.fetchall()
     try:
-    	appointment = appointments[0][0]
-    	last_visit = appointments[1][0]
+        appointment = appointments[0][0]
+        last_visit = appointments[1][0]
     except:
-    	appointment = 'N/A'
-    	last_visit = 'N/A'
+        appointment = 'N/A'
+        last_visit = 'N/A'
     return render_template("patient_profile.html", patient=patient,
                            appointment=appointment, last_visit=last_visit)
 
 
-@app.route("/profile/<patient_id>/delete", methods=['POST'])
+@app.route("/profile/<patient_id>/delete")
 def delete_profile(patient_id):
     db = database_ops.get_db()
     cur = db.execute(
@@ -113,12 +115,11 @@ def delete_profile(patient_id):
     return redirect(url_for("index"))
 
 
-@app.route("/profile/<patient_id>/start_test")
-def start_test(patient_id):
-    return redirect(url_for("devices", patient_id=patient_id))
+# @app.route("/profile/<patient_id>/start_test")
+# def start_test(patient_id):
+#     return redirect(url_for("devices", patient_id=patient_id))
 
 
 @app.route("/devices")
 def devices():
     return render_template("devices.html")
-
