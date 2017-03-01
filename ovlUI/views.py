@@ -71,7 +71,7 @@ def patient_form():
             file.filename = str(patientID) + '.jpg'
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            cur = db.execute('''INSERT INTO patients(patient_id, first_name, \
+        cur = db.execute('''INSERT INTO patients(patient_id, first_name, \
                 last_name, sex, date_of_birth, phone_number, notes) VALUES \
                 (?, ?, ?, ?, ?, ?, ?)''', (patientID, firstName, lastName, sex,
                                            dateOfBirth, phoneNum, comments))
