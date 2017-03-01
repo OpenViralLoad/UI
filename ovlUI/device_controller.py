@@ -97,7 +97,27 @@ def getStatus(id):
     lock.release()
     return json.dumps(status)
 
-    
+# ID is the ID that was given to the client for a particular device
+def restartThermocycler(id):
+    lock.acquire()
+    port = id_with_port_dictionary[id]
+    lock.release()
+    port.write("RESTART\n")
+
+# ID is the ID that was given to the client for a particular device
+def pauseThermocycler(id):
+    lock.acquire()
+    port = id_with_port_dictionary[id]
+    lock.release()
+    port.write("PAUSE\n")
+
+# ID is the ID that was given to the client for a particular device
+def resumeThermocycler(id):
+    lock.acquire()
+    port = id_with_port_dictionary[id]
+    lock.release()
+    port.write("RESUME\n")
+
 
 
 
