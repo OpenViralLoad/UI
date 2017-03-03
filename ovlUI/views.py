@@ -29,7 +29,7 @@ def index():
             if search_filter == "last_name":
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
-                    where last_name=:text", {"text": search_text})
+                    where upper(last_name)=:text", {"text": search_text.upper()})
             elif search_filter == "patient_id":
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
