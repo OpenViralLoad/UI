@@ -62,6 +62,8 @@ def patient_form():
             sex = 'M'
         dateOfBirth = request.form['date_of_birth']
         phoneNum = request.form['phone_number']
+        if phoneNum == "":
+            phoneNum = None
         comments = request.form['extra_comments']
         cur = db.execute('''SELECT COUNT (*) FROM patients''')
         numPatient = cur.fetchone()[0]
