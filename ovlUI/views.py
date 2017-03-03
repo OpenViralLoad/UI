@@ -35,6 +35,12 @@ def index():
                     "select patient_id, first_name, last_name from patients \
                     where patient_id=:text", {"text": search_text})
             else:
+                if '(' in search_text:
+                    search_text = search_text.replace('(', '')
+                if ')' in search_text:
+                    search_text = search_text.replace(')', '')
+                if '-' in search_text:
+                    search_text = search_text.replace('-', '')
                 cur = db.execute(
                     "select patient_id, first_name, last_name from patients \
                     where phone_number=:text", {"text": search_text})
@@ -62,6 +68,12 @@ def patient_form():
             sex = 'M'
         dateOfBirth = request.form['date_of_birth']
         phoneNum = request.form['phone_number']
+        if '(' in phoneNum:
+            phoneNum = phoneNum.replace('(', '')
+        if ')' in phoneNum:
+            phoneNum = phoneNum.replace(')', '')
+        if '-' in phoneNum:
+            phoneNum = phoneNum.replace('-', '')
         if phoneNum == "":
             phoneNum = None
         comments = request.form['extra_comments']
