@@ -13,6 +13,7 @@ function startTestModal() {
         var device_name = session[i]["device_type"] + " " + session[i]["device_num"];
         $("#modal-assigned-device").text(device_name);
         $("#start-test-modal-append").modal();
+        // Update the localStorage object
         localStorage.devices = JSON.stringify(session);
       }
     }
@@ -41,12 +42,13 @@ function startTestModal() {
         // Add device object to the session var
       session.push(new_ext);
       // Pop up modal to tell user which tab it was added to
-      var device_name = session[0]["device_type"] + " " + session[0]["device_num"];
+      var device_name = session[max_extractor_num - 1]["device_type"] + " " + session[max_extractor_num - 1]["device_num"];
       $("#modal-assigned-device").text(device_name);
       // Wait for the previous modal to finish closing animation
       $("#start-test-modal-init").on("hidden.bs.modal", function () {
         $("#start-test-modal-append").modal("show");
       });
+      // Update the localStorage object
       localStorage.devices = JSON.stringify(session);
     });
   }

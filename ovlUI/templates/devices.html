@@ -81,194 +81,9 @@
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="extrac_1" role="tabpanel">
-        <div class="col-sm-12 no-lr-padding">
-          <div class="custom-card rounded">
-            <h4 class="div-header">Extractor Progress</h4>
-            <div class="row">
-              <div id="lysis-step" class="inline-div text-center">Lysis</div>
-              <div id="wash-step1-1" class="inline-div text-center">Wash 1-1</div>
-              <div id="wash-step1-2" class="inline-div text-center">Wash 1-2</div>
-              <div id="wash-step2-1" class="inline-div text-center">Wash 2-1</div>
-              <div id="wash-step2-2" class="inline-div text-center">Wash 2-2</div>
-              <div id="elution-step" class="inline-div text-center">Elution</div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-warning mr-1" role="progressbar" style="width: 14%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="14"></div>
-              <div class="progress-bar bg-success mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
-              <div class="progress-bar bg-success mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
-              <div class="progress-bar mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
-              <div class="progress-bar mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 14%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="14"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="custom-card rounded col-sm-8">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Component</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Connection</td>
-                  <td>Port 123</td>
-                </tr>
-                <tr>
-                  <td>Lysis Buffer</td>
-                  <td>Empty!</td>
-                </tr>
-                <tr>
-                  <td>Wash Buffer 1-1</td>
-                  <td>Full</td>
-                </tr>
-                <tr>
-                  <td>Wash Buffer 1-2</td>
-                  <td>Empty!</td>
-                </tr>
-                <tr>
-                  <td>Wash Buffer 2-1</td>
-                  <td>Full</td>
-                </tr>
-                <tr>
-                  <td>Wash Buffer 2-2</td>
-                  <td>Full</td>
-                </tr>
-                <tr>
-                  <td>Elution Buffer</td>
-                  <td>Full</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-sm-4 no-lr-padding">
-            <div id="ext-status" class="custom-card rounded half-height">
-              <h4 class="div-header">Status</h4>
-              <p>Elapsed Time: 00:01:26</p>
-              <p>Overall Completion: 100%</p>
-            </div>
-            <div id="ext-ctrl" class="custom-card rounded  half-height">
-              <h4 class="div-header">Controls</h4>
-              <div class="text-left control-button">
-                <button class="btn btn-success btn-block" role="button">Start</button>
-              </div>
-              <div class="text-left control-button">
-                <button class="btn btn-danger btn-block" role="button">Stop</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="patient-samples col-sm-12 custom-card rounded">
-            <h4 class="div-header">Samples</h4>
-            <span class="badge badge-big badge-default">0096-Howard</span>
-            <span class="badge badge-big badge-primary">1385-Jones</span>
-            <span class="badge badge-big badge-success">4365-Sanchez</span>
-            <span class="badge badge-big badge-info">6873-Dalton</span>
-            <span class="badge badge-big badge-warning">2876-Nguyen</span>
-            <span class="badge badge-big badge-danger">3948-Mathis</span>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="extrac_2" role="tabpanel"></div>
-      <div class="tab-pane" id="therm_1" role="tabpanel">
-        <div id="primary-therm-row" class="row">
-          <div id="therm-leftside" class="col-sm-5">
-            <div id="therm-settings" class="card card-outline-primary card-block">
-              <table class="table table-striped">
-                <tr>
-                  <th>
-                    <h4>Device Settings</h4></th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <th>Connection</th>
-                  <th>Port 456</th>
-                </tr>
-                <tr>
-                  <th>Denaturation Mode</th>
-                  <th>Off</th>
-                </tr>
-                <tr>
-                  <th>Temperature for Floor</th>
-                  <th>60</th>
-                </tr>
-                <tr>
-                  <th>Temperature for Ceiling</th>
-                  <th>95</th>
-                </tr>
-                <tr>
-                  <th>Time for Maintain</th>
-                  <th>2</th>
-                </tr>
-                <tr>
-                  <th>Number of Cycles</th>
-                  <th>40</th>
-                </tr>
-              </table>
-            </div>
-            <div id="therm-controls" class="card card-outline-primary card-block">
-              <div id="btn-row1" class="row">
-                <div class="col-sm-6">
-                  <button class="btn btn-success btn-block" role="button">Start</button>
-                </div>
-                <div class="col-sm-6">
-                  <button class="btn btn-default btn-block" type="button" role="button" data-toggle="modal" data-target="#myModal">Change Settings</button>
-                </div>
-              </div>
-              <div id="btn-row2" class="row">
-                <div class="col-sm-6">
-                  <button class="btn btn-default btn-block" role="button">Restart</button>
-                </div>
-                <div class="col-sm-6">
-                  <button class="btn btn-danger btn-block" role="button">Stop</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="therm-rightside" class="col-sm-7">
-            <div id="therm-status" class="card card-outline-primary card-block">
-              <h3>Thermocycler Status</h3>
-              <div id="therm-progbar" class="progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" active="true" style="width: 45%">
-                  <span class="sr-only">45% Complete</span>
-                </div>
-              </div>
-              <div id="therm-rtstat" class="row">
-                <div class="col-sm-6">
-                  <p><b>Cycle </b> 14 <b>out of</b> 40</p>
-                  <p><b>Current Stage: </b> Cooling </p>
-                </div>
-                <div class="col-sm-6">
-                  <p><b>Current Temperature: </b> 58 C </p>
-                  <p><b>Time Elapsed: </b> 55 mins </p>
-                </div>
-              </div>
-            </div>
-            <div id="therm-pattern" class="card card-outline-primary card-block">
-              <b>Device Cycle Pattern</b>
-              <canvas class="cycleGraph"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="row therm-samples">
-          <div class="patient-samples col-sm-12 custom-card rounded">
-            <h4 class="div-header">Samples</h4>
-            <span class="badge badge-big badge-default">0096-Howard</span>
-            <span class="badge badge-big badge-primary">1385-Jones</span>
-            <span class="badge badge-big badge-success">4365-Sanchez</span>
-            <span class="badge badge-big badge-info">6873-Dalton</span>
-            <span class="badge badge-big badge-warning">2876-Nguyen</span>
-            <span class="badge badge-big badge-danger">3948-Mathis</span>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="therm_2" role="tabpanel"></div>
-      <div class="tab-pane" id="imager_1" role="tabpanel"></div>
-      <div class="tab-pane" id="imager_2" role="tabpanel"></div>
+      <div class="extractors-placeholder"></div>
+      <div class="thermocyclers-placeholder"></div>
+      <div class="imagers-placeholder"></div>
     </div>
   </div>
 
@@ -278,22 +93,231 @@
   <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
+  <!-- Handlebars Javascript -->
+  <script src="{{ url_for('static', filename='js/lib/handlebars-v4.0.5.js') }}"></script>
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
-  <!-- Thermo Cycle Graph Code -->
-  <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
   <!-- localStorage Code -->
   <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
+  <!-- Extractor Template -->
+  <script id="extractor-template" type="text/x-handlebars-template">
+    <div class="tab-pane active" id="extrac_1" role="tabpanel">
+      <div class="col-sm-12 no-lr-padding">
+        <div class="custom-card rounded">
+          <h4 class="div-header">Extractor Progress</h4>
+          <div class="row">
+            <div class="lysis-step inline-div text-center">Lysis</div>
+            <div class="wash-step1-1 inline-div text-center">Wash 1-1</div>
+            <div class="wash-step1-2 inline-div text-center">Wash 1-2</div>
+            <div class="wash-step2-1 inline-div text-center">Wash 2-1</div>
+            <div class="wash-step2-2 inline-div text-center">Wash 2-2</div>
+            <div class="elution-step inline-div text-center">Elution</div>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-warning mr-1" role="progressbar" style="width: 14%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="14"></div>
+            <div class="progress-bar bg-success mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
+            <div class="progress-bar bg-success mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
+            <div class="progress-bar mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
+            <div class="progress-bar mr-1" role="progressbar" style="width: 18%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="18"></div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 14%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="14"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="custom-card rounded col-sm-8">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Connection</td>
+                <td>Port 123</td>
+              </tr>
+              <tr>
+                <td>Lysis Buffer</td>
+                <td>Empty!</td>
+              </tr>
+              <tr>
+                <td>Wash Buffer 1-1</td>
+                <td>Full</td>
+              </tr>
+              <tr>
+                <td>Wash Buffer 1-2</td>
+                <td>Empty!</td>
+              </tr>
+              <tr>
+                <td>Wash Buffer 2-1</td>
+                <td>Full</td>
+              </tr>
+              <tr>
+                <td>Wash Buffer 2-2</td>
+                <td>Full</td>
+              </tr>
+              <tr>
+                <td>Elution Buffer</td>
+                <td>Full</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-4 no-lr-padding">
+          <div class="ext-status custom-card rounded half-height">
+            <h4 class="div-header">Status</h4>
+            <p>Elapsed Time: 00:01:26</p>
+            <p>Overall Completion: 100%</p>
+          </div>
+          <div class="ext-ctrl custom-card rounded  half-height">
+            <h4 class="div-header">Controls</h4>
+            <div class="text-left control-button">
+              <button class="btn btn-success btn-block" role="button">Start</button>
+            </div>
+            <div class="text-left control-button">
+              <button class="btn btn-danger btn-block" role="button">Stop</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="patient-samples col-sm-12 custom-card rounded">
+          <h4 class="div-header">Samples</h4>
+          <span class="badge badge-big badge-default">0096-Howard</span>
+          <span class="badge badge-big badge-primary">1385-Jones</span>
+          <span class="badge badge-big badge-success">4365-Sanchez</span>
+          <span class="badge badge-big badge-info">6873-Dalton</span>
+          <span class="badge badge-big badge-warning">2876-Nguyen</span>
+          <span class="badge badge-big badge-danger">3948-Mathis</span>
+        </div>
+      </div>
+    </div>
+  </script>
+  <!-- /Extractor Template -->
+  <!-- Thermocycler Template -->
+  <script id="therm-template" type="text/x-handlebars-template">
+    <div class="tab-pane" id="therm_1" role="tabpanel">
+      <div class="primary-therm-row row">
+        <div class="therm-leftside col-sm-5">
+          <div class="therm-settings card card-outline-primary card-block">
+            <table class="table table-striped">
+              <tr>
+                <th>
+                  <h4>Device Settings</h4></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th>Connection</th>
+                <th>Port 456</th>
+              </tr>
+              <tr>
+                <th>Denaturation Mode</th>
+                <th>Off</th>
+              </tr>
+              <tr>
+                <th>Temperature for Floor</th>
+                <th>60</th>
+              </tr>
+              <tr>
+                <th>Temperature for Ceiling</th>
+                <th>95</th>
+              </tr>
+              <tr>
+                <th>Time for Maintain</th>
+                <th>2</th>
+              </tr>
+              <tr>
+                <th>Number of Cycles</th>
+                <th>40</th>
+              </tr>
+            </table>
+          </div>
+          <div class="therm-controls card card-outline-primary card-block">
+            <div class="btn-row1 row">
+              <div class="col-sm-6">
+                <button class="btn btn-success btn-block" role="button">Start</button>
+              </div>
+              <div class="col-sm-6">
+                <button class="btn btn-default btn-block" type="button" role="button" data-toggle="modal" data-target="#myModal">Change Settings</button>
+              </div>
+            </div>
+            <div class="btn-row2 row">
+              <div class="col-sm-6">
+                <button class="btn btn-default btn-block" role="button">Restart</button>
+              </div>
+              <div class="col-sm-6">
+                <button class="btn btn-danger btn-block" role="button">Stop</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="therm-rightside col-sm-7">
+          <div class="therm-status card card-outline-primary card-block">
+            <h3>Thermocycler Status</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" active="true" style="width: 45%">
+                <span class="sr-only">45% Complete</span>
+              </div>
+            </div>
+            <div class="therm-rtstat row">
+              <div class="col-sm-6">
+                <p><b>Cycle </b> 14 <b>out of</b> 40</p>
+                <p><b>Current Stage: </b> Cooling </p>
+              </div>
+              <div class="col-sm-6">
+                <p><b>Current Temperature: </b> 58 C </p>
+                <p><b>Time Elapsed: </b> 55 mins </p>
+              </div>
+            </div>
+          </div>
+          <div class="therm-pattern card card-outline-primary card-block">
+            <b>Device Cycle Pattern</b>
+            <canvas class="cycleGraph"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="row therm-samples">
+        <div class="patient-samples col-sm-12 custom-card rounded">
+          <h4 class="div-header">Samples</h4>
+          <span class="badge badge-big badge-default">0096-Howard</span>
+          <span class="badge badge-big badge-primary">1385-Jones</span>
+          <span class="badge badge-big badge-success">4365-Sanchez</span>
+          <span class="badge badge-big badge-info">6873-Dalton</span>
+          <span class="badge badge-big badge-warning">2876-Nguyen</span>
+          <span class="badge badge-big badge-danger">3948-Mathis</span>
+        </div>
+      </div>
+    </div>
+  </script>
+  <!-- /Thermocycler Template -->
   <script>
-    if (localStorage.devices == null) {
-      localStorage.devices = JSON.stringify([]);
-      session = JSON.parse(localStorage.devices);
-    } else {
-      session = JSON.parse(localStorage.devices);
-    }
+    var session = load_session();
+
+    // Extractor
+    var extractor_source = $("#extractor-template").html();
+    var extractor_template = Handlebars.compile(extractor_source);
+    var extractor_html = extractor_template(session);
+    $(".extractors-placeholder").replaceWith(extractor_html);
+
+    // Thermocycler
+    var therm_source = $("#therm-template").html();
+    var therm_template = Handlebars.compile(therm_source);
+    var therm_html = therm_template(session);
+    $(".thermocyclers-placeholder").replaceWith(therm_html);
+
+    // Imager
+    // var imager_source = $("#imager-template").html();
+    // var imager_template = Handlebars.compile(imager_template);
+    // var imager_html = imager_template(session);
+    // $(".imagers-placeholder").html(imager_html);
+
+
     console.log(session);
   </script>
+  <!-- Thermo Cycle Graph Code -->
+  <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
 </body>
 
 </html>

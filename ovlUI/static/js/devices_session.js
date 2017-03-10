@@ -11,38 +11,38 @@ function getParamFromQueryStr(name, url) {
 }
 
 
-function addto_session() {
-  // Fetch new input from url query string
-  var add = {};
-  add.device_type = getParamFromQueryStr('device_type');
-  add.patient_id = [getParamFromQueryStr('patient_id')];
-  // Fetch saved content from localStorage
-  if (localStorage.devices == null) {
-    localStorage.devices = JSON.stringify([]);
-    session = JSON.parse(localStorage.devices);
-  } else {
-    session = JSON.parse(localStorage.devices);
-  }
-  // Check if new samples should go to an existing device tab or new tab
-  var devices_list = [];
-  session.forEach(function (dev) {
-    devices_list.push(dev.device_type);
-  });
-
-  if (devices_list.includes(add.device_type)) { // add to existing tab
-    session.forEach(function (device) {
-      if (add.device_type == device.device_type) {
-        device.patient_id = device.patient_id.concat(add.patient_id);
-        // console.log(device);
-      }
-    });
-  } else { // add new tab
-    session.push(add);
-  }
-  localStorage.devices = JSON.stringify(session);
-  console.log(session);
-  return session;
-}
+// function addto_session() {
+//   // Fetch new input from url query string
+//   var add = {};
+//   add.device_type = getParamFromQueryStr('device_type');
+//   add.patient_id = [getParamFromQueryStr('patient_id')];
+//   // Fetch saved content from localStorage
+//   if (localStorage.devices == null) {
+//     localStorage.devices = JSON.stringify([]);
+//     session = JSON.parse(localStorage.devices);
+//   } else {
+//     session = JSON.parse(localStorage.devices);
+//   }
+//   // Check if new samples should go to an existing device tab or new tab
+//   var devices_list = [];
+//   session.forEach(function (dev) {
+//     devices_list.push(dev.device_type);
+//   });
+//
+//   if (devices_list.includes(add.device_type)) { // add to existing tab
+//     session.forEach(function (device) {
+//       if (add.device_type == device.device_type) {
+//         device.patient_id = device.patient_id.concat(add.patient_id);
+//         // console.log(device);
+//       }
+//     });
+//   } else { // add new tab
+//     session.push(add);
+//   }
+//   localStorage.devices = JSON.stringify(session);
+//   console.log(session);
+//   return session;
+// }
 
 
 function save_session() {
@@ -75,11 +75,7 @@ function load_session() {
 }
 
 
-function clear_session() {
-  localStorage.clear();
-}
+// save_session();
 
-
-save_session();
 // TODO: now generate tabs and content based on stored parameters (2-6-17)
 // document.getElementById("result").innerHTML = localStorage.session[0].patient_id;
