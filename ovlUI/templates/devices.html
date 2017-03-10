@@ -30,54 +30,7 @@
       </ul>
     </nav>
     <ul class="nav nav-pills nav-justified top-status-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link active" data-toggle="tab" href="#extrac_1" role="tab">
-          <div class="tab_title">Extractor-1</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link" data-toggle="tab" href="#extrac_2" role="tab">
-          <div class="tab_title">Extractor-2</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 44%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link" data-toggle="tab" href="#therm_1" role="tab">
-          <div class="tab_title">Thermocycler-1</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 66%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link" data-toggle="tab" href="#therm_2" role="tab">
-          <div class="tab_title">Thermocycler-2</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 14%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link" data-toggle="tab" href="#imager_1" role="tab">
-          <div class="tab_title">Imager-1</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="dev_tab_nav nav-link" data-toggle="tab" href="#imager_2" role="tab">
-          <div class="tab_title">Imager-2</div>
-          <div class="progress">
-            <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 39%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a>
-      </li>
+      <div class="tabs-placeholder"></div>
     </ul>
 
     <div class="tab-content">
@@ -100,9 +53,33 @@
   <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
   <!-- localStorage Code -->
   <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
+  <!-- Tabs Template -->
+  <script id="tabs-template" type="text/x-handlebars-template">
+    {% raw %} {{#each this}}
+    <li class="nav-item">
+      <a class="dev_tab_nav nav-link {{#if active}}{{active}}{{/if}}" data-toggle="tab" href="#{{device_type}}_{{device_num}}" role="tab">
+        <div class="tab_title capitalize">{{device_type}}-{{device_num}}</div>
+        <div class="progress">
+          <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </a>
+    </li>
+    {{/each}}
+    <li class="nav-item">
+      <a class="dev_tab_nav nav-link" data-toggle="tab" href="#therm_1" role="tab">
+        <div class="tab_title">Thermocycler-1</div>
+        <div class="progress">
+          <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 66%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </a>
+    </li>
+    {% endraw %}
+  </script>
+  <!--END/ Tabs Template -->
   <!-- Extractor Template -->
   <script id="extractor-template" type="text/x-handlebars-template">
-    <div class="tab-pane active" id="extrac_1" role="tabpanel">
+    {% raw %}
+    <div class="tab-pane active" id="extractor_1" role="tabpanel">
       <div class="col-sm-12 no-lr-padding">
         <div class="custom-card rounded">
           <h4 class="div-header">Extractor Progress</h4>
@@ -194,10 +171,12 @@
         </div>
       </div>
     </div>
+    {% endraw %}
   </script>
-  <!-- /Extractor Template -->
+  <!--END/ Extractor Template -->
   <!-- Thermocycler Template -->
   <script id="therm-template" type="text/x-handlebars-template">
+    {% raw %}
     <div class="tab-pane" id="therm_1" role="tabpanel">
       <div class="primary-therm-row row">
         <div class="therm-leftside col-sm-5">
@@ -290,10 +269,27 @@
         </div>
       </div>
     </div>
+    {% endraw %}
   </script>
-  <!-- /Thermocycler Template -->
+  <!--END/ Thermocycler Template -->
   <script>
     var session = load_session();
+    session[0].active = "active";
+    // For testing purposes; TODO: include is_extractor property during creation
+    session.forEach(function(device) {
+      if (device.device_type == "extractor") {
+        device.is_extractor = 1;
+      } else if (device.device_type == "thermocycler") {
+        device.is_thermocycler = 1;
+      } else if (device.device_type == "imager") {
+        device.is_imager = 1;
+      }
+    });
+    // Tabs
+    var tabs_source = $("#tabs-template").html();
+    var tabs_template = Handlebars.compile(tabs_source);
+    var tabs_html = tabs_template(session);
+    $(".tabs-placeholder").replaceWith(tabs_html);
 
     // Extractor
     var extractor_source = $("#extractor-template").html();
