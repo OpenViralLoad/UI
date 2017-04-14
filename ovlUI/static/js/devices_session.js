@@ -1,14 +1,14 @@
-function getParamFromQueryStr(name, url) {
-  if (!url) {
-    url = window.location.href;
-  }
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+// function getParamFromQueryStr(name, url) {
+//   if (!url) {
+//     url = window.location.href;
+//   }
+//   name = name.replace(/[\[\]]/g, "\\$&");
+//   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+//     results = regex.exec(url);
+//   if (!results) return null;
+//   if (!results[2]) return '';
+//   return decodeURIComponent(results[2].replace(/\+/g, " "));
+// }
 
 
 // function addto_session() {
@@ -46,36 +46,35 @@ function getParamFromQueryStr(name, url) {
 
 
 function save_session() {
-  var session = {};
-  dev_tab_navs = document.getElementsByClassName("dev_tab_nav");
-  for (var i = 0; i < dev_tab_navs.length; i++) {
-    tab_nav = dev_tab_navs[i];
-    tab_link = tab_nav.getAttribute("href");
-    tab_content = document.getElementById(tab_link.replace("#", ""));
-    console.log(tab_content);
-    children = tab_nav.childNodes;
-    for (var j = 0; j < children.length; j++) {
-      if (children[j].className == "tab_title") {
-        title = children[j].innerHTML;
-      }
-    }
-  }
+	var session = {};
+	dev_tab_navs = document.getElementsByClassName("dev_tab_nav");
+	for (var i = 0; i < dev_tab_navs.length; i++) {
+		tab_nav = dev_tab_navs[i];
+		tab_link = tab_nav.getAttribute("href");
+		tab_content = document.getElementById(tab_link.replace("#", ""));
+		console.log(tab_content);
+		children = tab_nav.childNodes;
+		for (var j = 0; j < children.length; j++) {
+			if (children[j].className == "tab_title") {
+				title = children[j].innerHTML;
+			}
+		}
+	}
 
 }
 
 
 function load_session() {
-  if (localStorage.devices == null) {
-    localStorage.devices = JSON.stringify([]);
-    session = JSON.parse(localStorage.devices);
-  } else {
-    session = JSON.parse(localStorage.devices);
-  }
-  return session;
+	if (localStorage.devices == null) {
+		localStorage.devices = JSON.stringify([]);
+		session = JSON.parse(localStorage.devices);
+	} else {
+		session = JSON.parse(localStorage.devices);
+	}
+	return session;
 }
 
 
 // save_session();
 
-// TODO: now generate tabs and content based on stored parameters (2-6-17)
 // document.getElementById("result").innerHTML = localStorage.session[0].patient_id;
