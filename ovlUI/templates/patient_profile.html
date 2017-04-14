@@ -179,6 +179,8 @@
     //   "rate": 12,
     //   "destination": "therm_1"
     // }];
+
+    // Fetch localStorage session or init empty session
     if (localStorage.devices == null) {
       localStorage.devices = JSON.stringify([]);
       session = JSON.parse(localStorage.devices);
