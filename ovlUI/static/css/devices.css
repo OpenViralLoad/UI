@@ -1,69 +1,79 @@
+.capitalize {
+  text-transform: capitalize;
+}
+
 .tab_progress {
-    height: 2px;
+  height: 2px;
 }
 
-#lysis-step, #elution-step {
-    width: 14%;
+.elution-step,
+.lysis-step {
+  width: 14%;
 }
 
-#wash-step1-1, #wash-step1-2, #wash-step2-1, #wash-step2-2 {
-    width: 18%;
+.wash-step1-1,
+.wash-step1-2,
+.wash-step2-1,
+.wash-step2-2 {
+  width: 18%;
 }
 
-#ext-status>h4, #ext-ctrl>h4 {
-    margin-bottom: 20px;
+.ext-ctrl > h4,
+.ext-status > h4 {
+  margin-bottom: 20px;
 }
 
-#ext-status>p:nth-child(2) {
-    margin-bottom: 10px;
+.ext-status > p:nth-child(2) {
+  margin-bottom: 10px;
 }
 
-#primary-therm-row {
-    height: 580px;
+.primary-therm-row {
+  height: 580px;
 }
 
-#therm-leftside {
-    padding-left: 0px;
+.therm-leftside {
+  padding-left: 0;
 }
 
-#therm-settings {
-    height: 70%;
+.therm-settings {
+  height: 70%;
 }
 
-#btn-row1, #btn-row2 {
-    margin-top: 18px;
+.therm-controls {
+  height: 30%;
 }
 
-#therm-controls {
-    height: 30%;
+.btn-row1,
+.btn-row2 {
+  margin-top: 18px;
 }
 
-#therm-rightside {
-    padding-left: 0px;
-    padding-right: 0px;
+.therm-rightside {
+  padding-left : 0;
+  padding-right: 0;
 }
 
-#therm-status {
-    height: 30%;
+.therm-status {
+  height: 30%;
 }
 
-#therm-rtstat {
-    margin-top: 10px;
+.therm-rtstat {
+  margin-top: 10px;
 }
 
-#therm-pattern {
-    height: 70%;
+.therm-pattern {
+  height: 70%;
 }
 
 .cycleGraph {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .badge-big {
-    font-size: 120%;
-    font-weight: 600;
+  font-size  : 120%;
+  font-weight: 600;
 }
 
 .therm-samples {
-    padding-top: 15px;
+  padding-top: 15px;
 }
