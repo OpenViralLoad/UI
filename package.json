@@ -1,0 +1,10 @@
+{
+  "name": "WorldCare_Technologies_User_Interface",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "electron-prebuilt": "*",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
+  }
+}

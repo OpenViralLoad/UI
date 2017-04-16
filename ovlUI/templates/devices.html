@@ -272,20 +272,27 @@
     </div>
   </div>
 
+  <!-- Insert this line above script imports for electron  -->
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
   <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/jquery-3.2.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
+
   <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
   <!-- Thermo Cycle Graph Code -->
   <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
   <!-- localStorage Code -->
   <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
-  <script>
+  
+  <!-- Insert this line after script imports for electron -->
+ <script>if (window.module) module = window.module;</script>
+  
+ <script>
     if (localStorage.devices == null) {
       localStorage.devices = JSON.stringify([]);
       session = JSON.parse(localStorage.devices);
