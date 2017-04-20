@@ -162,37 +162,14 @@
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.min.js') }}"></script>
+  <!-- TEST -->
   <script>
-    // var session = [];
-    // var session = [{
-    //   "device_type": "extractor",
-    //   "device_num": 0,
-    //   "samples": [{
-    //     "patient_id": 0,
-    //     "patient_lname": "Monkey"
-    //   }, {
-    //     "patient_id": 1,
-    //     "patient_lname": "Roronoa"
-    //   }],
-    //   "max_slots": 3,
-    //   "serial_port_id": 1234,
-    //   "rate": 12,
-    //   "destination": "therm_1"
-    // }];
-
-    // Fetch localStorage session or init empty session
-    if (localStorage.devices == null) {
-      localStorage.devices = JSON.stringify([]);
-      session = JSON.parse(localStorage.devices);
-    } else {
-      session = JSON.parse(localStorage.devices);
-    }
-    console.log(session);
-    var new_sample = {
+    var sample = {
       "patient_id": "{{ patient.patient_id }}",
       "patient_lname": "{{ patient.last_name }}"
     };
   </script>
+  <script src="{{ url_for('static', filename='js/test.js') }}"></script>
   <!-- ChartJS Graph Code -->
   <script src="{{ url_for('static', filename='js/profile_graph.js') }}"></script>
   <!-- Start Test Modal Code -->
