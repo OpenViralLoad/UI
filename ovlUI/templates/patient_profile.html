@@ -152,6 +152,8 @@
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.min.js') }}"></script>
+  <!-- ChartJS Graph Code -->
+  <script src="{{ url_for('static', filename='js/profile_graph.js') }}"></script>
   <!-- Add Samples Code -->
   <script>
     var sample = {
@@ -159,9 +161,7 @@
       "patient_lname": "{{ patient.last_name }}"
     };
   </script>
-  <script src="{{ url_for('static', filename='js/add_sample.js') }}"></script>
-  <!-- ChartJS Graph Code -->
-  <script src="{{ url_for('static', filename='js/profile_graph.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
 </body>
 
 </html>
