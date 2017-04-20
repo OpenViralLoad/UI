@@ -46,13 +46,13 @@ function loadSession() {
 
 function sessionStatus(session) {
 	var status = {};
-	var status.total = session.length;
-	var status.num_extractors = 0;
-	var status.num_thermocyclers = 0;
-	var status.num_imagers = 0;
-	var status.all_extractors = []; var status.open_extractors = [];
-	var status.all_thermocyclers = []; var status.open_thermocyclers = [];
-	var status.all_imagers = []; var status.open_imagers = [];
+	status.total = session.length;
+	status.num_extractors = 0;
+	status.num_thermocyclers = 0;
+	status.num_imagers = 0;
+	status.all_extractors = []; status.open_extractors = [];
+	status.all_thermocyclers = []; status.open_thermocyclers = [];
+	status.all_imagers = []; status.open_imagers = [];
 	for (var i = 0; i < total_num_devices; i++) {
 		if (session[i].type == "extractor") {
 			status.num_extractors++;
@@ -110,12 +110,13 @@ function createExtractor(session) {
 	if (sessionStatus(session).num_thermocyclers > 0) {
 		var thermocyclers = {};
 		for (var i = 0; i < sessionStatus(session).num_thermocyclers; i++) {
+			var number = i + 1;
 			var thermocyclers = {
-				i + 1 : sessionStatus(session).all_thermocyclers[i].fetchName()
+				number : sessionStatus(session).all_thermocyclers[i].fetchName()
 			};
 		}
 		var dropdown = document.getElementById("extractor-dropdown-destination");
-		for(i in thermocyclers) {
+		for (i in thermocyclers) {
 		    select.options[select.options.length] = new Option(thermocyclers[i], i);
 		}
 	} else { // default to 1 if no thermocyclers active
@@ -138,7 +139,7 @@ function createExtractor(session) {
 		}
 		// Update the localStorage object
 		localStorage.devices = JSON.stringify(session);
-	}
+	});
 }
 
 
@@ -148,8 +149,9 @@ function createThermocycler(session) {
 	if (sessionStatus(session).num_imagers > 0) {
 		var imagers = {};
 		for (var i = 0; i < sessionStatus(session).num_imagers; i++) {
+			number = i + 1;
 			var imagers = {
-				i + 1 : sessionStatus(session).all_imagers[i].fetchName()
+				number : sessionStatus(session).all_imagers[i].fetchName()
 			};
 		}
 		var dropdown = document.getElementById("thermocycler-dropdown-destination");
@@ -176,11 +178,11 @@ function createThermocycler(session) {
 		}
 		// Update the localStorage object
 		localStorage.devices = JSON.stringify(session);
-	}
+	});
 }
 
 
-function createExtractor(session) {
+function createImager(session) {
 	var destination = 0;
 	// Open modal with imager params form
 	$("#create-imager-modal").modal();
@@ -193,5 +195,5 @@ function createExtractor(session) {
 		session.push(new_imager);
 		// Update the localStorage object
 		localStorage.devices = JSON.stringify(session);
-	}
+	});
 }

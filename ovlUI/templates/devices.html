@@ -51,36 +51,31 @@
   <!-- ChartJS Javascript -->
   <script src="{{ url_for('static', filename='js/lib/Chart.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/jQuery-plugin-progressbar.js') }}"></script>
-  <!-- localStorage Code -->
-  <script src="{{ url_for('static', filename='js/devices_session.js') }}"></script>
+  <!-- Sessions Var Code -->
+  <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
   <!-- Tabs Template -->
   <script id="tabs-template" type="text/x-handlebars-template">
-    {% raw %} {{#each this}}
+    {% raw %}
+    {{#each this}}
     <li class="nav-item">
-      <a class="dev_tab_nav nav-link {{#if active}}{{active}}{{/if}}" data-toggle="tab" href="#{{device_type}}_{{device_num}}" role="tab">
-        <div class="tab_title capitalize">{{device_type}}-{{device_num}}</div>
+      <a class="dev_tab_nav nav-link {{#if active}}{{active}}{{/if}}" data-toggle="tab" href="#{{type}}_{{number}}" role="tab">
+        <div class="tab_title capitalize">{{type}}-{{number}}</div>
         <div class="progress">
           <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </a>
     </li>
     {{/each}}
-    <li class="nav-item">
-      <a class="dev_tab_nav nav-link" data-toggle="tab" href="#therm_1" role="tab">
-        <div class="tab_title">Thermocycler-1</div>
-        <div class="progress">
-          <div class="tab_progress progress-bar bg-success" role="progressbar" style="width: 66%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </a>
-    </li>
     {% endraw %}
   </script>
   <!--END/ Tabs Template -->
   <!-- Extractor Template -->
   <script id="extractor-template" type="text/x-handlebars-template">
     {% raw %}
+    {{#each this}}
+    {{#if is_extractor}}
     <!-- TODO: loop through each extractor in session var -->
-    <div class="tab-pane active" id="extractor_1" role="tabpanel">
+    <div class="tab-pane {{#if active}}{{active}}{{/if}}" id="{{type}}_{{number}}" role="tabpanel">
       <div class="col-sm-12 no-lr-padding">
         <div class="custom-card rounded">
           <h4 class="div-header">Extractor Progress</h4>
@@ -172,13 +167,17 @@
         </div>
       </div>
     </div>
+    {{/if}}
+    {{/each}}
     {% endraw %}
   </script>
   <!--END/ Extractor Template -->
   <!-- Thermocycler Template -->
   <script id="therm-template" type="text/x-handlebars-template">
     {% raw %}
-    <div class="tab-pane" id="therm_1" role="tabpanel">
+    {{#each this}}
+    {{#if is_thermocycler}}
+    <div class="tab-pane {{#if active}}{{active}}{{/if}}" id="{{type}}_{{number}}" role="tabpanel">
       <div class="primary-therm-row row">
         <div class="therm-leftside col-sm-5">
           <div class="therm-settings card card-outline-primary card-block">
@@ -270,50 +269,63 @@
         </div>
       </div>
     </div>
+    {{/if}}
+    {{/each}}
     {% endraw %}
   </script>
   <!--END/ Thermocycler Template -->
+  <!--  TODO: Create Imager Template  -->
   <script>
-    var session = load_session();
-    session[0].active = "active";
-    // For testing purposes; TODO: include is_extractor property during creation
-    session.forEach(function(device) {
-      if (device.device_type == "extractor") {
-        device.is_extractor = 1;
-      } else if (device.device_type == "thermocycler") {
-        device.is_thermocycler = 1;
-      } else if (device.device_type == "imager") {
-        device.is_imager = 1;
-      }
-    });
-    // Tabs
-    var tabs_source = $("#tabs-template").html();
-    var tabs_template = Handlebars.compile(tabs_source);
-    var tabs_html = tabs_template(session);
-    $(".tabs-placeholder").replaceWith(tabs_html);
-
-    // Extractor
-    var extractor_source = $("#extractor-template").html();
-    var extractor_template = Handlebars.compile(extractor_source);
-    var extractor_html = extractor_template(session);
-    $(".extractors-placeholder").replaceWith(extractor_html);
-
-    // Thermocycler
-    var therm_source = $("#therm-template").html();
-    var therm_template = Handlebars.compile(therm_source);
-    var therm_html = therm_template(session);
-    $(".thermocyclers-placeholder").replaceWith(therm_html);
-
-    // Imager
-    // var imager_source = $("#imager-template").html();
-    // var imager_template = Handlebars.compile(imager_template);
-    // var imager_html = imager_template(session);
-    // $(".imagers-placeholder").html(imager_html);
-
-
+    var session = loadSession();
+    // TESTING: until we get the settings/device creation page working
+    var new_ext = new Device("extractor");
+    var new_therm = new Device("thermocycler");
+    session.push(new_ext, new_therm);
+    ///////////////////////////////////////////////////////////////////
+    if (session.length > 0) {
+      // For Handlebars setup purposes:
+      // Make the first device tab active
+      session[0].active = "active";
+      // Since Handlebars can only do simple conditionals
+      session.forEach(function(device) {
+        if (device.type == "extractor") {
+          device.is_extractor = 1;
+        } else if (device.type == "thermocycler") {
+          device.is_thermocycler = 1;
+        } else if (device.type == "imager") {
+          device.is_imager = 1;
+        }
+      });
     console.log(session);
+      // Tabs
+      var tabs_source = $("#tabs-template").html();
+      var tabs_template = Handlebars.compile(tabs_source);
+      var tabs_html = tabs_template(session);
+      $(".tabs-placeholder").replaceWith(tabs_html);
+
+      // Extractor
+      var extractor_source = $("#extractor-template").html();
+      var extractor_template = Handlebars.compile(extractor_source);
+      var extractor_html = extractor_template(session);
+      $(".extractors-placeholder").replaceWith(extractor_html);
+
+      // Thermocycler
+      var therm_source = $("#therm-template").html();
+      var therm_template = Handlebars.compile(therm_source);
+      var therm_html = therm_template(session);
+      $(".thermocyclers-placeholder").replaceWith(therm_html);
+
+      // Imager
+      // var imager_source = $("#imager-template").html();
+      // var imager_template = Handlebars.compile(imager_template);
+      // var imager_html = imager_template(session);
+      // $(".imagers-placeholder").html(imager_html);
+    } else {
+      // TODO: Show message-"There are no active device modules. Start by setting up a few before you begin tests. *button to redirect to settings page*"
+    }
   </script>
   <!-- Thermo Cycle Graph Code -->
+  <!-- TODO: only apply the thermocycler when there are active thermocyclers -->
   <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
 </body>
 
