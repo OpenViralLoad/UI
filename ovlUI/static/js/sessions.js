@@ -86,6 +86,7 @@ function startTest(session, sample) {
 		if (session[i].type == "extractor" && session.hasOpenSlot()) {
 			need_more_devices = false;
 			session[i].addSample(sample);
+			// TODO: dropdown to let user pick which extractor to add to?
 			// Modal to tell user which device it was added to
 			var device_name = session[i].type + " " + session[i].number;
 			$("#modal-assigned-device").text(device_name);
