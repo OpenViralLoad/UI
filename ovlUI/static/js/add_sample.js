@@ -55,19 +55,17 @@ function startTest(session, sample) {
 			need_more_devices = false;
 			session[i].addSample(sample);
 			// Modal to tell user which device it was added to
+			var device_name = session[i].type + " " + session[i].number;
 			$("#modal-assigned-device").text(device_name);
 			$("#start-test-modal-append").modal();
 			// Update the localStorage object
 			localStorage.devices = JSON.stringify(session);
+			// Go to Devices page
+			window.location.href = "/devices";
 			break;
 		}
 	}
 	if (need_more_devices == true) {
-
+		$("#no-avail-extractor-modal").modal();
 	}
 }
-
-
-
-
-var session = loadSession();

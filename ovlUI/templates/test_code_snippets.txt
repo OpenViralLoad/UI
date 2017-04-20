@@ -1,0 +1,28 @@
+<!-- Modal to create new extractor in session -->
+<div class="modal fade" id="start-test-modal-init" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-init-title">Create a New Extractor Tab</h5>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="serial_port_form">Serial Port ID</label>
+          <input class="form-control" type="number" id="serial_port_form" name="serial_port">
+        </div>
+        <div class="form-group">
+          <label for="extrac-rate-form">Extraction Rate (mm/s)</label>
+          <input class="form-control" type="number" step=0.1 id="extrac-rate-form" name="extrac_rate">
+        </div>
+        <div class="form-group">
+          <label for="rec-device-form">Receiving Thermocycler #</label>
+          <input class="form-control" type="number" id="rec-device-form" name="rec-device">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="continue-init" type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+      </div>
+    </div>
+  </div>
+</div> 
