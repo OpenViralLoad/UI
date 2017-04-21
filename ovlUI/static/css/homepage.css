@@ -13,3 +13,8 @@
 #search-filter {
     height: 38px;
 }
+
+html,body{
+    height: 100%;
+    width: 100%;
+}

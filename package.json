@@ -4,7 +4,12 @@
   "main": "main.js",
   "dependencies": {
     "electron-prebuilt": "*",
+    "handlebars": "^4.0.6",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
+  },
+  "devDependencies": {
+    "electron": "^1.6.2",
+    "electron-packager": "^8.6.0"
   }
 }

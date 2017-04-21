@@ -1,11 +1,3 @@
-html {
-    height: 100vh;
-}
-
-body {
-    min-height: 100vh;
-}
-
 nav.navbar {
     margin-bottom: 20px;
 }
