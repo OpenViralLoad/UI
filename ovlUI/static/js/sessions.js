@@ -6,6 +6,7 @@ class Device {
 			"imager": 4
 		};
 		this.type = type;
+        this.name = type + " " + number;
 		this.number = number;
 		this.num_slots = type_to_slots[type];
 		this.destination = destination;

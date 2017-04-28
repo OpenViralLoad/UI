@@ -137,3 +137,7 @@ def delete_profile(patient_id):
 @app.route("/devices")
 def devices():
     return render_template("devices.html")
+
+@app.route("/device_management")
+def device_management():
+    return render_template("device_management.html")

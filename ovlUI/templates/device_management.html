@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <title>OVL | Home</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Font-Awesome-Icons -->
+  <link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="{{ url_for('static', filename='css/header.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/homepage.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-toggleable-sm">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Patients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/devices">Devices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/device_management">Device Management</a>
+        </li>
+      </ul>
+    </nav>
+      
+    <button type="button" class="btn btn-success">Add a New Device</button>
+    <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Device Name</th>
+                <th>Device Type</th>
+                <th>Connection Status</th>
+                <th>Connection Port</th>
+                <th></th>
+                <th></th>                                  
+                <th></th>
+
+                
+              </tr>
+            </thead>
+   
+            <tbody class="known_devices">
+            </tbody>
+              
+          </table>  <!-- Insert this line above script imports for electron  -->
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
+  <!-- Handlebars Javascript -->
+  <script src="{{ url_for('static', filename='js/lib/handlebars-v4.0.5.js') }}"></script>
+   <!-- Sessions Var Code -->
+  <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
+   <!-- Extractor Template -->
+  <script id="devices-template" type="text/x-handlebars-template">
+      <tbody>
+              {% raw %}
+              {{#each this}}
+              <tr>
+              
+                <td>{{name}}</td>
+                <td>{{type}}</td>
+                <td>Disconnected</td>
+                <td>{{serial_port}}</td>
+                <td><button type="button" class="btn btn-success">Change Settings</button></td>
+                <td><button type="button" class="btn btn-success">Reconnect</button></td>                
+                <td><button type="button" class="btn btn-success">Remove Device</button></td>
+
+
+              </tr>
+                {{/each}}
+              {% endraw %}
+      </tbody>
+</script>
+      
+  <script>
+      var session = loadSession();
+          var new_ext = new Device("extractor");
+    var new_therm = new Device("thermocycler");
+    session.push(new_ext, new_therm);
+      var device_source = $("#devices-template").html();
+      var device_template = Handlebars.compile(device_source);
+      var device_html = device_template(session);
+      $(".known_devices").replaceWith(device_html);
+  </script>
+
+  
+    
+ <!-- Insert this line after script imports for electron -->
+ <script>if (window.module) module = window.module;</script>
+    
+  <!-- Clickable search results -->
+  <script>
+    jQuery(document).ready(function($) {
+      $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+      });
+    });
+  </script>
+</body>
+
+</html>
