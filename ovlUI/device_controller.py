@@ -51,14 +51,36 @@ def getPorts():
     return json.dumps({'devices' : list_of_devices})
 
 # Connects to port p, a string representation of the port to connect to. Example: "COM4"
-# Returns the ID of the port to refer to it in the future.
+# Returns JSON with the serial_number, device_subscription_id, and device_port
 def connectToPort(p):
     lock.acquire()
     deviceId = ++deviceIdCounter
     port = serial.Serial(p)
     id_with_port_dictionary[deviceId] = port
+    port.write("Pinging for serial code\n")
+    serialNumber = port.readline()
     lock.release()
-    return deviceId
+    return json.dumps({'serial_number': serialNumber, 'device_subscription_id': deviceId, 'device_port' : p}
+
+# Given a list of serial numbers, connects to devices with the matching serial numbers.
+# Returns JSON array with the serial_number, device_subscription_id, and device_port
+def connectKnownPorts(arrayOfSerialNums):
+    connected_devices = {'devices_connected': []}
+    for connectable_port in serial.tools.list_ports.comports():
+        port = serial.Serial(connectable_port)
+        port.write("Pinging for serial code\n")
+        serialNumFromPort = port.readline()
+        for deviceSerialNum in arrayOfSerialNums:
+            if deviceSerialNum = serialNumFromPort:
+                serialNumFound = serialNumFromPort
+                lock.acquire()
+                deviceId = ++ deviceIdCounter
+                id_with_port_dictionary[deviceId] = port
+                lock.release()
+                connected_devices['devices_connected'].append({'serial_number': deviceSerialNum, 'device_subscription_id': deviceId, 'device_port': connectable_port})
+    return json.dumps(connected_devices)
+                
+        
 
 # ID is the ID that was given to the client for a particular device
 # Settings is a JSON object with the following format:
