@@ -1,21 +1,18 @@
 class Device {
-	constructor(type, number = 1, destination = 1, serial_port = "", samples = []) {
+	constructor(type, number = 1, destination = 1, serial_port = "", samples = [], is_connected = 0) {
 		var type_to_slots = {
 			"extractor": 1,
 			"thermocycler": 4,
 			"imager": 4
 		};
 		this.type = type;
-        this.name = type + " " + number;
+		this.name = type + " " + number;
 		this.number = number;
 		this.num_slots = type_to_slots[type];
 		this.destination = destination;
 		this.serial_port = serial_port;
 		this.samples = samples;
-	}
-
-	fetchName() {
-		return this.type + this.number.toString();
+		this.is_connected = is_connected;
 	}
 
 	addSample(new_sample) {
@@ -51,9 +48,12 @@ function sessionStatus(session) {
 	status.num_extractors = 0;
 	status.num_thermocyclers = 0;
 	status.num_imagers = 0;
-	status.all_extractors = []; status.open_extractors = [];
-	status.all_thermocyclers = []; status.open_thermocyclers = [];
-	status.all_imagers = []; status.open_imagers = [];
+	status.all_extractors = [];
+	status.open_extractors = [];
+	status.all_thermocyclers = [];
+	status.open_thermocyclers = [];
+	status.all_imagers = [];
+	status.open_imagers = [];
 	for (var i = 0; i < total_num_devices; i++) {
 		if (session[i].type == "extractor") {
 			status.num_extractors++;
@@ -105,6 +105,34 @@ function startTest(session, sample) {
 }
 
 
+function newDeviceInit() {
+	// Generate the form:
+	// Populate with possible destination + serial ports
+	var ports = ['COM1', 'COM2', 'COM3']; // TESTING PURPOSES
+	$.each(ports, function(index, value) {
+		$("#serial_port_form").append($("<option />").text(value));
+	});
+
+	// $.getJSON("/device_management/get_ports", function(data) {
+	// 	var ports = data["devices"];
+	// 	$.each(ports, function(index, value) {
+	// 	  $("#serial_port_form").append($("<option />").text(value));
+	// 	});
+	// });
+	// Show modal after form options generated
+	$("#new-device-modal").modal();
+	// Erase form options once modal is closed
+	$('#new-device-modal').on('hidden.bs.modal', function(e) {
+		$("#serial_port_form").empty();
+	})
+}
+
+
+function newDeviceConn() {
+	// Take values from the form and instantiate device object
+}
+
+
 // TODO: build the corresponding "Settings" page for this
 function createExtractor(session) {
 	// Generate dropdown options for extractor destination
@@ -114,12 +142,12 @@ function createExtractor(session) {
 		for (var i = 0; i < sessionStatus(session).num_thermocyclers; i++) {
 			var number = i + 1;
 			var thermocyclers = {
-				number : sessionStatus(session).all_thermocyclers[i].fetchName()
+				number: sessionStatus(session).all_thermocyclers[i].name
 			};
 		}
 		var dropdown = document.getElementById("extractor-dropdown-destination");
 		for (i in thermocyclers) {
-		    select.options[select.options.length] = new Option(thermocyclers[i], i);
+			select.options[select.options.length] = new Option(thermocyclers[i], i);
 		}
 	} else { // default to 1 if no thermocyclers active
 		var destination = 1;
@@ -153,12 +181,12 @@ function createThermocycler(session) {
 		for (var i = 0; i < sessionStatus(session).num_imagers; i++) {
 			number = i + 1;
 			var imagers = {
-				number : sessionStatus(session).all_imagers[i].fetchName()
+				number: sessionStatus(session).all_imagers[i].name
 			};
 		}
 		var dropdown = document.getElementById("thermocycler-dropdown-destination");
-		for(i in imagers) {
-		    select.options[select.options.length] = new Option(imagers[i], i);
+		for (i in imagers) {
+			select.options[select.options.length] = new Option(imagers[i], i);
 		}
 	} else { // default to 1 if no thermocyclers active
 		var destination = 1;

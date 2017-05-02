@@ -18,6 +18,38 @@
 </head>
 
 <body>
+  <div class="modal fade" id="new-device-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="new-device-modal-title">Add a New Device</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="device_type_form">Device Type</label>
+            <select class="form-control" id="device_type_form">
+              <option>Extractor</option>
+              <option>Thermocycler</option>
+              <option>Imager</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="device_type_form">Serial Port</label>
+            <select class="form-control" id="serial_port_form">
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="rec-device-form">Destination</label>
+            <input class="form-control" type="number" id="rec-device-form" name="rec-device">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="new-device-modal-cont" type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <nav class="navbar navbar-toggleable-sm">
       <ul class="nav nav-pills">
@@ -32,83 +64,81 @@
         </li>
       </ul>
     </nav>
-      
-    <button type="button" class="btn btn-success">Add a New Device</button>
+
+    <button type="button" class="btn btn-success" role="button" onclick="newDeviceInit()">Add a New Device</button>
     <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Device Name</th>
-                <th>Device Type</th>
-                <th>Connection Status</th>
-                <th>Connection Port</th>
-                <th></th>
-                <th></th>                                  
-                <th></th>
-              </tr>
-            </thead>
-   
-            <tbody class="known_devices">
-            </tbody>
-              
-          </table>  <!-- Insert this line above script imports for electron  -->
-   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+      <thead>
+        <tr>
+          <th>Device Name</th>
+          <th>Device Type</th>
+          <th>Connection Status</th>
+          <th>Connection Port</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
-  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
-  <!-- Handlebars Javascript -->
-  <script src="{{ url_for('static', filename='js/lib/handlebars-v4.0.5.js') }}"></script>
-   <!-- Sessions Var Code -->
-  <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
-   <!-- Extractor Template -->
-  <script id="devices-template" type="text/x-handlebars-template">
-      <tbody>
-              {% raw %}
-              {{#each this}}
-              <tr>
-              
-                <td>{{name}}</td>
-                <td>{{type}}</td>
-                <td>Disconnected</td>
-                <td>{{serial_port}}</td>
-                <td><button type="button" class="btn btn-success">Change Settings</button></td>
-                <td><button type="button" class="btn btn-success">Reconnect</button></td>                
-                <td><button type="button" class="btn btn-success">Remove Device</button></td>
-
-
-              </tr>
-                {{/each}}
-              {% endraw %}
+      <tbody class="known_devices">
       </tbody>
-</script>
-      
-  <script>
+
+    </table>
+    <!-- Insert this line above script imports for electron  -->
+    <script>
+      if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+      }
+    </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
+    <!-- Handlebars Javascript -->
+    <script src="{{ url_for('static', filename='js/lib/handlebars-v4.0.5.js') }}"></script>
+    <!-- Sessions Var Code -->
+    <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
+    <!-- Extractor Template -->
+    <script id="devices-template" type="text/x-handlebars-template">
+      <tbody>
+        {% raw %} {{#each this}}
+        <tr>
+
+          <td>{{name}}</td>
+          <td>{{type}}</td>
+          <td>Disconnected</td>
+          <td>{{serial_port}}</td>
+          <td><button type="button" class="btn btn-success">Change Settings</button></td>
+          <td><button type="button" class="btn btn-success">Reconnect</button></td>
+          <td><button type="button" class="btn btn-success">Remove Device</button></td>
+
+
+        </tr>
+        {{/each}} {% endraw %}
+      </tbody>
+    </script>
+
+    <script>
       var session = loadSession();
-          var new_ext = new Device("extractor");
-    var new_therm = new Device("thermocycler");
-    session.push(new_ext, new_therm);
+      var new_ext = new Device("extractor");
+      var new_therm = new Device("thermocycler");
+      session.push(new_ext, new_therm);
       var device_source = $("#devices-template").html();
       var device_template = Handlebars.compile(device_source);
       var device_html = device_template(session);
       $(".known_devices").replaceWith(device_html);
-  </script>
+    </script>
 
-  
-    
- <!-- Insert this line after script imports for electron -->
- <script>if (window.module) module = window.module;</script>
-    
-  <!-- Clickable search results -->
-  <script>
-    jQuery(document).ready(function($) {
-      $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-      });
-    });
-  </script>
+
+
+    <!-- Insert this line after script imports for electron -->
+    <script>
+      if (window.module) module = window.module;
+    </script>
+
 </body>
 
 </html>
