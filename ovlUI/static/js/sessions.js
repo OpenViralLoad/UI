@@ -54,7 +54,7 @@ function sessionStatus(session) {
 	status.open_thermocyclers = [];
 	status.all_imagers = [];
 	status.open_imagers = [];
-	for (var i = 0; i < total_num_devices; i++) {
+	for (var i = 0; i < status.total; i++) {
 		if (session[i].type == "extractor") {
 			status.num_extractors++;
 			status.all_extractors.push(session[i]);
@@ -107,7 +107,7 @@ function startTest(session, sample) {
 
 function newDeviceInit() {
 	// Generate the form:
-	// Populate with possible destination + serial ports
+	// Populate with possible serial ports
 	var ports = ['COM1', 'COM2', 'COM3']; // TESTING PURPOSES
 	$.each(ports, function(index, value) {
 		$("#serial_port_form").append($("<option />").text(value));
@@ -119,12 +119,38 @@ function newDeviceInit() {
 	// 	  $("#serial_port_form").append($("<option />").text(value));
 	// 	});
 	// });
+
+
 	// Show modal after form options generated
 	$("#new-device-modal").modal();
 	// Erase form options once modal is closed
 	$('#new-device-modal').on('hidden.bs.modal', function(e) {
 		$("#serial_port_form").empty();
-	})
+	});
+}
+
+
+function newDeviceDestination(session) {
+	$("#receiving_dev_form").empty();
+	var dev_val = $("#device_type_form").val();
+	if (dev_val > -1 && dev_val < 2) {
+		$("#receiving_dev_form_group").show();
+		var dest_actives = sessionStatus(session).all_thermocyclers;
+		if (dev_val == 1)
+			dest_actives = sessionStatus(session).all_imagers;
+		for (var i=0; i < dest_actives.length; i++) {
+			var dev = dest_actives[i];
+			$("#receiving_dev_form").append($("<option />").text(dev.name));
+		}
+	} else {
+		$("#receiving_dev_form_group").hide();
+	}
+
+	// Erase form options once modal is closed
+	$('#new-device-modal').on('hidden.bs.modal', function(e) {
+		$("#device_type_form")[0].selectedIndex = 0;
+		$("#receiving_dev_form").empty();
+	});
 }
 
 

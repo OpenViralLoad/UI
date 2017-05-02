@@ -4,10 +4,12 @@ Extractor UI Representation:
 3. Status table: checkmarks instead of "full/empty"
 
 04/20/17:
-1. Sample adding: let user pick which extractor it gets assigned to?
-2. Tweak Device class to include other relevant features from tab content
-3. Flask API for device controller & AJAX functions in Device class
+0. Device Connection: device management page
+1. Sample adding: Modal displays diagram of slots - where to put sample
+2. Flask API for device controller & AJAX functions in Device class
+3. Tweak Device class to include other relevant features from tab content
 4. Function to save information from tab contents back into localStorage
 5. Function to transfer samples between devices
-  a. let user pick destination or automate?
+  a. automate: modal displays diagram of slots - where to put sample
 6. Function to add results to database once imaging is complete
+7. Button to clear sessions
