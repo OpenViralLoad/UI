@@ -28,7 +28,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="device_type_form">Device Type</label>
-            <select class="form-control" id="device_type_form" onchange="newDeviceDestination(session)">
+            <select class="form-control" id="device_type_form" onchange="newDevice1(session)">
               <option value="9999"></option>
               <option value="0">Extractor</option>
               <option value="1">Thermocycler</option>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="new-device-modal-cont" type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+          <button id="new-device-modal-cont" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="newDevice2(session)">Continue</button>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
       </ul>
     </nav>
 
-    <button type="button" class="btn btn-success" role="button" onclick="newDeviceInit()">Add a New Device</button>
+    <button type="button" class="btn btn-success" role="button" onclick="newDevice0()">Add a New Device</button>
     <table class="table table-striped">
       <thead>
         <tr>

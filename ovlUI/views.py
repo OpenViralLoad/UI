@@ -147,3 +147,8 @@ def device_management():
 @app.route("/device_management/get_ports")
 def get_ports():
     return device_controller.getPorts()
+
+
+@app.route("/device_management/connect_device/<p>")
+def connect_device(p):
+    return device_controller.connectToPort(p)
