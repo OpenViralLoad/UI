@@ -30,7 +30,7 @@
       <div class="div-header">
         <h2 id="form-title">Patient Information</h2>
       </div>
-      <form action="/patient_form" method="POST", enctype="multipart/form-data">
+      <form action="/patient_form" method="POST" , enctype="multipart/form-data">
         <div class="form-group">
           <label for="first-name-input">First Name<font color='red'>*</font></label>
           <input class="form-control" type="text" id="first-name-input" name="first_name" required>
@@ -76,19 +76,26 @@
       </form>
     </div>
   </div>
-    
+
   <!-- Insert this line above script imports for electron -->
-  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/jquery-3.2.1.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="{{ url_for('static', filename='js/lib/ie10-viewport-bug-workaround.js') }}"></script>
-    
+
   <!-- Insert this line after script imports for electron -->
-  <script>if (window.module) module = window.module;</script>
+  <script>
+    if (window.module) module = window.module;
+  </script>
 </body>
 
 </html>

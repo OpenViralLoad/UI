@@ -1,7 +1,7 @@
-from flask import render_template, request, flash, redirect, url_for
-from ovlUI import app, database_ops
-from werkzeug import secure_filename
 import os
+from flask import render_template, request, flash, redirect, url_for
+from werkzeug import secure_filename
+from ovlUI import app, database_ops, device_controller
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -138,6 +138,17 @@ def delete_profile(patient_id):
 def devices():
     return render_template("devices.html")
 
+
 @app.route("/device_management")
 def device_management():
     return render_template("device_management.html")
+
+
+@app.route("/device_management/get_ports")
+def get_ports():
+    return device_controller.getPorts()
+
+
+@app.route("/device_management/connect_device/<p>")
+def connect_device(p):
+    return device_controller.connectToPort(p)
