@@ -40,11 +40,16 @@
     </div>
   </div>
 
-      <!-- Insert this line above script imports for electron -->
-  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <!-- Insert this line above script imports for electron -->
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='js/lib/jquery-3.1.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/jquery-3.2.1.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/tether.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -58,8 +63,7 @@
   <script src="{{ url_for('static', filename='js/sessions.js') }}"></script>
   <!-- Tabs Template -->
   <script id="tabs-template" type="text/x-handlebars-template">
-    {% raw %}
-    {{#each this}}
+    {% raw %} {{#each this}}
     <li class="nav-item">
       <a class="dev_tab_nav nav-link {{#if active}}{{active}}{{/if}}" data-toggle="tab" href="#{{type}}_{{number}}" role="tab">
         <div class="tab_title capitalize">{{type}}-{{number}}</div>
@@ -68,15 +72,12 @@
         </div>
       </a>
     </li>
-    {{/each}}
-    {% endraw %}
+    {{/each}} {% endraw %}
   </script>
   <!--END/ Tabs Template -->
   <!-- Extractor Template -->
   <script id="extractor-template" type="text/x-handlebars-template">
-    {% raw %}
-    {{#each this}}
-    {{#if is_extractor}}
+    {% raw %} {{#each this}} {{#if is_extractor}}
     <!-- TODO: loop through each extractor in session var -->
     <div class="tab-pane {{#if active}}{{active}}{{/if}}" id="{{type}}_{{number}}" role="tabpanel">
       <div class="col-sm-12 no-lr-padding">
@@ -170,16 +171,12 @@
         </div>
       </div>
     </div>
-    {{/if}}
-    {{/each}}
-    {% endraw %}
+    {{/if}} {{/each}} {% endraw %}
   </script>
   <!--END/ Extractor Template -->
   <!-- Thermocycler Template -->
   <script id="therm-template" type="text/x-handlebars-template">
-    {% raw %}
-    {{#each this}}
-    {{#if is_thermocycler}}
+    {% raw %} {{#each this}} {{#if is_thermocycler}}
     <div class="tab-pane {{#if active}}{{active}}{{/if}}" id="{{type}}_{{number}}" role="tabpanel">
       <div class="primary-therm-row row">
         <div class="therm-leftside col-sm-5">
@@ -272,9 +269,7 @@
         </div>
       </div>
     </div>
-    {{/if}}
-    {{/each}}
-    {% endraw %}
+    {{/if}} {{/each}} {% endraw %}
   </script>
   <!--END/ Thermocycler Template -->
   <!--  TODO: Create Imager Template  -->
@@ -299,7 +294,7 @@
           device.is_imager = 1;
         }
       });
-    console.log(session);
+      console.log(session);
       // Tabs
       var tabs_source = $("#tabs-template").html();
       var tabs_template = Handlebars.compile(tabs_source);
@@ -330,10 +325,12 @@
   <!-- Thermo Cycle Graph Code -->
   <!-- TODO: only apply the thermocycler when there are active thermocyclers -->
   <script src="{{ url_for('static', filename='js/therm_graph.js') }}"></script>
-    
-    
- <!-- Insert this line after script imports for electron -->
- <script>if (window.module) module = window.module;</script>
+
+
+  <!-- Insert this line after script imports for electron -->
+  <script>
+    if (window.module) module = window.module;
+  </script>
 </body>
 
 </html>

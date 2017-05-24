@@ -1,6 +1,7 @@
 class Device {
 	constructor(type, number = 1, destination = 1,
-		serial_port = "", samples = [], is_connected = 0, subscription_id = 0) {
+		serial_port = "", samples = [], is_connected = 0,
+		serial_number = 0, subscription_id = 0) {
 		var type_to_slots = {
 			"extractor": 1,
 			"thermocycler": 4,
@@ -14,6 +15,7 @@ class Device {
 		this.serial_port = serial_port;
 		this.samples = samples;
 		this.is_connected = is_connected;
+		this.serial_number = serial_number;
 		this.subscription_id = subscription_id;
 	}
 
@@ -111,18 +113,19 @@ function newDevice0() {
 	// Populate with possible serial ports
 
 	// TESTING PURPOSES //////
-	var ports = ['COM1', 'COM2', 'COM3'];
-	$.each(ports, function(index, value) {
-		$("#serial_port_form").append($("<option />").text(value).val(index));
-	});
+	// var ports = ['COM1', 'COM2', 'COM3'];
+	// $.each(ports, function(index, value) {
+	// 	$("#serial_port_form").append($("<option />").text(value).val(index));
+	// });
 	//////////////////////////
 
-	// $.getJSON("/device_management/get_ports", function(data) {
-	// 	var ports = data["devices"];
-	// 	$.each(ports, function(index, value) {
-	// 	  $("#serial_port_form").append($("<option />").text(value).val(index));
-	// 	});
-	// });
+	$.getJSON("/device_management/get_ports", function(data) {
+		var ports = data["devices"];
+		$.each(ports, function(index, value) {
+			$("#serial_port_form").append($("<option />").text(value).val(index));
+		});
+		console.log(ports);
+	});
 
 
 	// Show modal after form options generated
@@ -160,6 +163,7 @@ function newDevice1(session) {
 
 function newDevice2(session) {
 	// Take values from the form
+	console.log(session);
 	var dev_type = $("#device_type_form option:selected").text();
 	var dev_num = "";
 	if (dev_type == "extractor") {
@@ -173,8 +177,10 @@ function newDevice2(session) {
 	var dev_rec = $("#receiving_dev_form option:selected").text();
 	var conn_string = "/device_management/connect_device/" + String(dev_port)
 	$.getJSON(conn_string, function(data) {
+		var ser_num = data['serial_number'];
 		var sub_id = data['device_subscription_id'];
-		var new_dev = new Device(dev_type, dev_num, dev_rec, dev_port, [], 1, sub_id);
+		console.log(ser_num);
+		var new_dev = new Device(dev_type, dev_num, dev_rec, dev_port, [], 1, ser_num, sub_id);
 		// Add to session
 		session.push(new_dev);
 		// Update the localStorage object
