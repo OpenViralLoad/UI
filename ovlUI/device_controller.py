@@ -2,19 +2,6 @@ import serial.tools.list_ports
 import json
 import threading
 
-#Class for threads that listen to the thermocycler for updates
-class ThermocyclerListener(threading.Thread):
-    def __init__(self, port):
-        threading.Thread.__init__(self)
-        self.port = port
-
-    #Override
-    def run(self):
-        while True:
-            print(self.port.readline())
-
-
-
 # Lock to prevent race conditions on port dictionary and
 # the device ID generator.
 lock = threading.Lock()
@@ -32,11 +19,28 @@ id_with_port_dictionary = {}
 # CURRENT_STATE : "IDLE", "DENATURATION", "RAMPING_UP", "COOLING_DOWN", "UPPER_MAINTAIN" or "LOWER_MAINTAIN"
 # CURRENT_CYCLE : the current cycle the process is on
 # CURRENT_TIME  : the time elapsed on the current process
+# CURRENT_TEMP : the current temperature.
 id_with_most_recent_state_dictionary = {}
 
 # This is the counter used to generate the ID that the user can use to access the port.
 deviceIdCounter = 0
 
+#Class for threads that listen to the thermocycler for updates
+class ThermocyclerListener(threading.Thread):
+    def __init__(self, port, id):
+        threading.Thread.__init__(self)
+        self.port = port
+        self.id = id
+
+    #Override
+    def run(self):
+        while True:
+            state = self.port.readline()
+            cycle = self.port.readline()
+            time = self.port.readline()
+            temp = self.port.readline()
+            id_with_port_dictionary[id] = {'CURRENT_STATE': state, 'CURRENT_CYCLE':cycle, 'CURRENT_TIME':time, 'CURRENT_TEMP':temp }
+            
 
 # Returns a JSON object in the form:
 # {devices: [device1, device2...]}
@@ -102,7 +106,7 @@ def startThermocycler(id, settings):
     port.write(str(setting_values["TIME_FOR_MAINTAIN"]) + "\n")
     port.write(str(setting_values["NUM_CYCLES"]) + "\n")
     port.write("START\n")
-    listener = ThermocyclerListener(port)
+    listener = ThermocyclerListener(port, id)
     listener.start()
 
 # ID is the ID that was given to the client for a particular device
@@ -112,6 +116,7 @@ def startThermocycler(id, settings):
 # (only one of these will be assigned to CURRENT_STATE).
 # CURRENT_CYCLE : the current cycle the process is on
 # CURRENT_TIME  : the time elapsed on the current process
+# CURRENT_TEMP : the current temp on the current process.
 #}
 def getStatus(id):
     lock.acquire()
