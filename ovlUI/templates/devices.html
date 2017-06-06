@@ -275,6 +275,8 @@
   <!--  TODO: Create Imager Template  -->
   <script>
     var session = loadSession();
+    reconnectKnown(session);
+
     // TESTING: until we get the settings/device creation page working
     var new_ext = new Device("extractor");
     var new_therm = new Device("thermocycler");
@@ -294,7 +296,7 @@
           device.is_imager = 1;
         }
       });
-      console.log(session);
+
       // Tabs
       var tabs_source = $("#tabs-template").html();
       var tabs_template = Handlebars.compile(tabs_source);

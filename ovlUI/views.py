@@ -139,6 +139,13 @@ def devices():
     return render_template("devices.html")
 
 
+@app.route("/devices/reconnect_known", methods=['GET', 'POST'])
+def reconnect_known():
+    if request.method == 'POST':
+        content = request.get_json()
+    return device_controller.connectKnownPorts(content['dev_serials'])
+
+
 @app.route("/device_management")
 def device_management():
     return render_template("device_management.html")

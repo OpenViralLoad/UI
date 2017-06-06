@@ -33,6 +33,20 @@ class Device {
 }
 
 
+// extended function for posting clientside json to flask views.py
+jQuery.extend({
+  postJSON: function(params) {
+    return jQuery.ajax(jQuery.extend(params, {
+      type: "POST",
+      data: JSON.stringify(params.data),
+      dataType: "json",
+      contentType: "application/json",
+      processData: false
+    }));
+  }
+});
+
+
 function loadSession() {
 	// Fetch localStorage session or init empty session
 	var session = [];
@@ -58,6 +72,7 @@ function sessionStatus(session) {
 	status.open_thermocyclers = [];
 	status.all_imagers = [];
 	status.open_imagers = [];
+	status.all_serials = []
 	for (var i = 0; i < status.total; i++) {
 		if (session[i].type == "extractor") {
 			status.num_extractors++;
@@ -80,6 +95,7 @@ function sessionStatus(session) {
 				status.open_imagers.push(session[i]);
 			}
 		}
+		status.all_serials.push(session[i].serial_number);
 	}
 	return status;
 }
@@ -187,4 +203,17 @@ function newDevice2(session) {
 		localStorage.devices = JSON.stringify(session);
 	});
 	console.log(session);
+}
+
+
+function reconnectKnown(session) {
+	if (session.length > 0) {
+		$.postJSON({
+				url: '/devices/reconnect_known',
+				data: {dev_serials: sessionStatus(session).all_serials},
+				success: function(json) {
+					console.log(json);
+				},
+		});
+	}
 }
